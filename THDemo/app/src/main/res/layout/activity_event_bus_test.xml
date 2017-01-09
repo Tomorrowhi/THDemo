@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/title_tab_style">
+
+        <include layout="@layout/title_return_iv" />
+
+        <TextView
+            style="@style/title_center_desc"
+            android:text="EventBus 3.0 Test" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Fragment内容区" />
+
+    <RelativeLayout
+        android:id="@+id/event_bus_fragment_place"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/shape_purple_rectangle"
+        android:padding="2dp">
+
+    </RelativeLayout>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:rowCount="2"
+        android:useDefaultMargins="true">
+
+        <Button
+            android:id="@+id/event_bus_send_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送普通事件" />
+
+        <Button
+            android:id="@+id/event_bus_send_event_thread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送普通事件(子线程中发送)" />
+
+        <Button
+            android:id="@+id/event_bus_send_stick_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送黏性事件" />
+
+        <Button
+            android:id="@+id/event_bus_send_stick_event_thread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送黏性事件(在子线程中发送)" />
+
+
+    </GridLayout>
+
+
+</LinearLayout>

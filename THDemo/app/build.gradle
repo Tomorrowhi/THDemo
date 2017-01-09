@@ -1,22 +1,126 @@
+import java.text.SimpleDateFormat
+
 apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'bugly'
+
+bugly {
+    appId = '41fccb5801'
+    appKey = '6983422f-abd1-4355-bc62-b09386372df9'
+}
+
+//获取系统时间
+def buildTime() {
+    def df = new SimpleDateFormat("yyyyMMdd")
+    df.setTimeZone(TimeZone.getDefault())
+    return df.format(new Date())
+}
+
+def apkName = "thdemo"
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.tomorrowhi.thdemo"
-        minSdkVersion 23
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        // dex突破65535的限制
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "061e7cc7593e0f93ee2e1c11", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
-    buildTypes {
+    dataBinding {
+        enabled = true
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("/Users/zhaotaotao/.android/debug.keystore")
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            storeFile file('thdemo.jks')
+            storePassword 'thdemo'
+            keyAlias 'thdemo'
+            keyPassword 'thdemo'
         }
     }
+
+    //lint检查,有任何的错误或者警告提示,都会终止构建,可以将其关掉。
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+        checkReleaseBuilds false
+    }
+
+    buildTypes {
+
+        debug {
+            versionNameSuffix "-debug"
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            //是否打开debuggable开关
+            debuggable true
+            //是否打开jniDebuggable开关
+            jniDebuggable false
+            //签名配置
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            debuggable false
+            //混淆
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
+            //移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = outputFile.name.replace("app", "${apkName}-${defaultConfig.versionName}-${buildTime()}")
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
+    }
+
+    productFlavors {
+    }
+
+    sourceSets { main { jni.srcDirs = ['src/main/jni', 'src/main/jni/'] } }
+}
+
+apt {
+    arguments {
+        eventBusIndex "com.tomorrowhi.thdemo.MyEventBusIndex"
+    }
+}
+
+greendao {
+    schemaVersion 1     //数据库版本号
+    daoPackage 'com.tomorrowhi.thdemo.dao'    //数据库相关文件包名
+    targetGenDir 'src/main/java'    //
 }
 
 dependencies {
@@ -25,5 +129,31 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.google.zxing:core:3.3.0'
+    compile 'cn.bingoogolapple:bga-qrcodecore:1.1.5@aar'
+    compile 'cn.bingoogolapple:bga-zxing:1.1.5@aar'
+    compile 'com.squareup.picasso:picasso:2.5.2'
     testCompile 'junit:junit:4.12'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    apt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+    compile 'org.greenrobot:greendao:3.2.0'
+    compile 'org.greenrobot:greendao-generator:3.2.0'
+    compile 'com.bigkoo:pickerview:2.1.1'
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    compile 'com.blankj:utilcode:latest.release'
+    compile 'cn.jiguang.sdk:jpush:3.0.0'  // 此处以JPush 3.0.0 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.0.0'  // 此处以JCore 1.0.0 版本为例。
 }
+
+
