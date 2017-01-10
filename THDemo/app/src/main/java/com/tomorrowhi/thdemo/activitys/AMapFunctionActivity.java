@@ -69,6 +69,7 @@ public class AMapFunctionActivity extends BaseActivity {
                 startActivity(new Intent(this, AmapMapActivity.class));
                 break;
             case R.id.amap_locus_history:
+                startActivity(new Intent(this, AMapLocusActivity.class));
                 break;
             case R.id.amap_geography:
                 break;
