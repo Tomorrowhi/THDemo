@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo;
 import android.support.multidex.MultiDexApplication;
 
 import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.utils.ToastUtils;
 import com.blankj.utilcode.utils.Utils;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tomorrowhi.thdemo.dao.DaoMaster;
@@ -89,6 +90,7 @@ public class MyApplication extends MultiDexApplication {
     private void initUtils() {
         Utils.init(this);
         LogUtils.init(isLogAndDebug, false, 'v', logTag);
+        ToastUtils.init(false);
     }
 
     private void initBugLy() {

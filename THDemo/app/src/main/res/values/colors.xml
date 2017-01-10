@@ -4,8 +4,12 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!--透明-->
+    <color name="transparent_1">#00000000</color>
+
     <color name="white_1">#FFFFFF</color>
     <color name="blue_1">#069fe6</color>
     <color name="purple_2">#6638f2</color>
+    <color name="black_1">#000000</color>
 
 </resources>

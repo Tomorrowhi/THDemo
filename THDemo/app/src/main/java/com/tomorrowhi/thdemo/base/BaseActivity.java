@@ -20,8 +20,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mContext = this;
         myApplication = MyApplication.getInstance();
-        init(savedInstanceState);
         setContentView(getLayoutRes());
+        init(savedInstanceState);
         initView();
         initData();
         initEvent();

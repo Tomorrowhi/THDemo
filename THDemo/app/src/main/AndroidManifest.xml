@@ -59,6 +59,9 @@
         <!--APP-->
         <activity android:name=".activitys.EventBusTestActivity" />
         <activity android:name=".activitys.ReceiverEventBusStickActivity" />
+        <activity android:name=".activitys.AmapMapActivity" />
+        <activity android:name=".activitys.AMapNavigationActivity" />
+        <activity android:name=".activitys.AMapFunctionActivity" />
 
         <!--高德SDK KEY相关-->
         <meta-data
