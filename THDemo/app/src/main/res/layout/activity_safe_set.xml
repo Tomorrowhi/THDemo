@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout style="@style/title_tab_style">
+
+        <include layout="@layout/title_return_iv" />
+
+        <TextView
+            style="@style/title_center_desc"
+            android:text="AMap 设置安全区域" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        style="@style/activity_content_ll"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="17"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="17"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/safe_set_family"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_family" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_above="@+id/safe_set_location_des"
+                    android:layout_below="@+id/safe_set_family"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="1dp"
+                    android:background="@drawable/layer_list_vertical_dotted_line"
+                    android:layerType="software" />
+
+                <ImageView
+                    android:id="@+id/safe_set_location_des"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_location_description" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="83"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/safe_set_range_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="可以输入这个区域的名字"
+                    android:imeOptions="actionDone"
+                    android:inputType="text|textCapCharacters"
+                    android:maxLength="8"
+                    android:maxLines="1"
+                    android:textColor="@color/purple_2"
+                    android:textColorHint="@color/purple_2" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_1" />
+
+                <TextView
+                    android:id="@+id/safe_set_range_des"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:textColor="@color/gray_1" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="72"
+            android:background="@color/black_1">
+
+            <com.amap.api.maps.MapView
+                android:id="@+id/map_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.amap.api.maps.MapView>
+
+            <Button
+                android:id="@+id/safe_range_radius_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/selector_safe_range_radius"
+                android:padding="20dp"
+                android:text="@string/safe_set_radius_bt"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="12">
+
+            <Button
+                android:id="@+id/save_safe_range"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_save_safety_range_bt"
+                android:text="@string/safe_set_save_safety_zone"
+                android:textColor="@color/white_1"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

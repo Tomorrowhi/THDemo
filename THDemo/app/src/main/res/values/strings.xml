@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">THDemo</string>
+
+    <string name="safe_set_radius_bt">半径%1$d米内</string>
+    <string name="safe_set_save_safety_zone">保存安全区</string>
+    <string name="safe_set_zone_range_desc">区域范围</string>
+    <string name="safe_set_meter">米</string>
 </resources>

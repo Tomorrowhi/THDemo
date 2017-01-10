@@ -33,5 +33,12 @@
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_marginBottom">22dp</item>
     </style>
-
+    <style name="activity_content_ll">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">90</item>
+        <item name="android:background">@color/white_2</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">20dp</item>
+    </style>
 </resources>

@@ -8,8 +8,18 @@
     <color name="transparent_1">#00000000</color>
 
     <color name="white_1">#FFFFFF</color>
+    <color name="white_2">#EBEBEB</color>
+
     <color name="blue_1">#069fe6</color>
+    <color name="blue_2">#59AAFD</color>
+    <color name="blue_5">#389AFF</color>
+    <color name="blue_7">#8059AAFD</color>
+    <color name="blue_8">#2059AAFD</color>
+
     <color name="purple_2">#6638f2</color>
+
     <color name="black_1">#000000</color>
+
+    <color name="gray_1">#999999</color>
 
 </resources>
