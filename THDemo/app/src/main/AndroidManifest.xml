@@ -64,6 +64,8 @@
         <activity android:name=".activitys.AMapFunctionActivity" />
         <activity android:name=".activitys.AMapLocusActivity" />
         <activity android:name=".activitys.SafetyRangeSetActivity" />
+        <activity android:name=".activitys.RxJavaUseActivity" />
+        <activity android:name=".activitys.RxPreferenceActivity" />
 
         <!--高德SDK KEY相关-->
         <meta-data

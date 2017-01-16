@@ -28,7 +28,6 @@ import com.blankj.utilcode.utils.LogUtils;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.base.LocusPointBean;
-import com.tomorrowhi.thdemo.util.DialogUtil;
 import com.tomorrowhi.thdemo.util.locationUtiils.LocationUtil;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -40,7 +39,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -83,7 +81,6 @@ public class AMapLocusActivity extends BaseActivity implements GeocodeSearch.OnG
 
     @Override
     protected void initComplete(Bundle savedInstanceState) {
-
     }
 
     @Override
@@ -93,7 +90,7 @@ public class AMapLocusActivity extends BaseActivity implements GeocodeSearch.OnG
             public void run() {
                 startPlayLocus();
             }
-        },2000);
+        }, 2000);
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -127,7 +124,6 @@ public class AMapLocusActivity extends BaseActivity implements GeocodeSearch.OnG
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        ButterKnife.bind(this);
         amapMapView.onCreate(savedInstanceState);
         myApplication.getEventBus().register(this);
     }
@@ -234,6 +230,11 @@ public class AMapLocusActivity extends BaseActivity implements GeocodeSearch.OnG
                             wait();
                         }
                     }
+
+                    if (Thread.interrupted()) {
+                        LogUtils.d("Thread1" + threadName + " exiting.");
+                        break;
+                    }
                     if (i == (locusPointBeanList.size() - 1)) {
                         //最后一条数据，发送改变文字标识通知
                         LogUtils.d("locus play over");
@@ -248,6 +249,7 @@ public class AMapLocusActivity extends BaseActivity implements GeocodeSearch.OnG
                 } catch (InterruptedException e) {
                     LogUtils.d("Thread " + threadName + " interrupted.");
                     e.printStackTrace();
+                    Thread.currentThread().interrupt();
                 }
                 if (end) {
                     break;
@@ -272,19 +274,25 @@ public class AMapLocusActivity extends BaseActivity implements GeocodeSearch.OnG
          * 暂停
          */
         void suspend() {
-            suspended = true;
+            if (thread != null) {
+                suspended = true;
+            }
         }
 
         /**
          * 继续
          */
         synchronized void resume() {
-            suspended = false;
-            notify();
+            if (thread != null && suspended) {
+                suspended = false;
+                notify();
+            }
         }
 
         void endThread() {
             end = true;
+            thread.interrupt();
+            thread = null;
         }
 
     }
@@ -403,12 +411,19 @@ public class AMapLocusActivity extends BaseActivity implements GeocodeSearch.OnG
     protected void onPause() {
         super.onPause();
         amapMapView.onPause();
+        if (playLocus != null) {
+            playLocus.suspend();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         amapMapView.onResume();
+        if (playLocus != null) {
+            playLocus.resume();
+        }
+
     }
 
     @Override
@@ -421,9 +436,16 @@ public class AMapLocusActivity extends BaseActivity implements GeocodeSearch.OnG
     protected void onDestroy() {
         if (playLocus != null) {
             playLocus.endThread();
+            playLocus = null;
         }
-        super.onDestroy();
+        if (mExecutorService != null) {
+            mExecutorService.shutdown();
+            mExecutorService.shutdownNow();
+            mExecutorService = null;
+        }
         amapMapView.onDestroy();
+        LogUtils.d("locus destroy 轨迹界面 ");
+        super.onDestroy();
     }
 
 }

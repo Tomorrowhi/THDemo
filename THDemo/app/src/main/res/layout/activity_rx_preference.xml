@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/title_tab_style">
+
+        <include layout="@layout/title_return_iv" />
+
+        <TextView
+            style="@style/title_center_desc"
+            android:text="RxPreference Function" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/input_text_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="plz input data" />
+
+    <Button
+        android:id="@+id/write_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="write" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="read content" />
+
+    <Button
+        android:id="@+id/read_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="read" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="listen data" />
+
+    <TextView
+        android:id="@+id/sp_listen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

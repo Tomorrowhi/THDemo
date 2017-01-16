@@ -44,7 +44,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -120,7 +119,6 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        ButterKnife.bind(this);
         aMapMapView.onCreate(savedInstanceState);
         geocoderSearch = new GeocodeSearch(mContext);
         geocoderSearch.setOnGeocodeSearchListener(this);
@@ -408,11 +406,10 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         stopLocation();
         aMapMapView.onDestroy();
         destoryLocation();
-
+        super.onDestroy();
     }
 
     @Override

@@ -49,7 +49,6 @@ public class ReceiverEventBusStickActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
         myApplication.getEventBus().register(this);
     }
 

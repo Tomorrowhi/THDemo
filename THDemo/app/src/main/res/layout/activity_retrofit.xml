@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/title_tab_style">
+
+        <include layout="@layout/title_return_iv" />
+
+        <TextView
+            style="@style/title_center_desc"
+            android:text="Retrofit Function" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_purple_rectangle"
+        android:minHeight="300dp">
+
+        <TextView
+            android:id="@+id/retrofit_result_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/app_update_download_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/app_upgrade_progress_bar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:max="100"
+                android:progressDrawable="@drawable/progress_horizontal_view" />
+
+            <TextView
+                android:id="@+id/app_upgrade_progress_bar_tv"
+                style="@style/app_upgrade_progress_tv"
+                android:text="0" />
+
+            <TextView
+                style="@style/app_upgrade_progress_tv"
+                android:layout_toEndOf="@+id/app_upgrade_progress_bar_tv"
+                android:layout_toRightOf="@+id/app_upgrade_progress_bar_tv"
+                android:text="%" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <GridLayout
+        style="@style/grid_layout_style"
+        android:columnCount="3">
+
+        <Button
+            android:id="@+id/retrofit_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="POST" />
+
+        <Button
+            android:id="@+id/retrofit_get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GET" />
+
+        <Button
+            android:id="@+id/retrofit_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="download" />
+
+    </GridLayout>
+</LinearLayout>

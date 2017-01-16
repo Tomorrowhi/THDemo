@@ -1,13 +1,16 @@
 package com.tomorrowhi.thdemo.activitys;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
+import com.blankj.utilcode.utils.LogUtils;
+import com.f2prateek.rx.preferences2.Preference;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
+import com.tomorrowhi.thdemo.common.MyConstants;
 import com.tomorrowhi.thdemo.util.DialogUtil;
 
 import butterknife.BindView;
@@ -20,8 +23,14 @@ public class MainActivity extends BaseActivity {
     Button eventBusTestBt;
     @BindView(R.id.a_map_test_bt)
     Button picassoTestBt;
-    @BindView(R.id.activity_main)
-    LinearLayout activityMain;
+    @BindView(R.id.green_dao_test_bt)
+    Button greenDaoTestBt;
+    @BindView(R.id.retrofit_test_bt)
+    Button retrofitTestBt;
+    @BindView(R.id.rx_Java_test_bt)
+    Button rxJavaTestBt;
+    @BindView(R.id.rx_preference_test_bt)
+    Button rxPreferenceTestBt;
 
     @Override
     protected int getLayoutRes() {
@@ -34,36 +43,69 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initEvent() {
-        DialogUtil.progressDialog(mContext, "测试", true);
     }
 
     @Override
     protected void initData() {
-
+        //初始化权限
+        rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.READ_PHONE_STATE)
+                .subscribe(granted -> {
+                    if (granted) {
+                        //已经获取权限
+                    } else {
+                        //未获取权限
+                    }
+                });
+        rxPermissions.requestEach(Manifest.permission.CAMERA, Manifest.permission.READ_PHONE_STATE)
+                .subscribe(permission -> {
+                    if (permission.granted) {
+                        LogUtils.d("获取的权限名：" + permission.name);
+                    } else {
+                        LogUtils.d("拒绝的权限名：" + permission.name);
+                    }
+                });
+        Preference<Long> appId = defaultRxPreferences.getLong(MyConstants.APP_ID);
+        LogUtils.d("main Activity appId:" + appId.get());
     }
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
-
+        DialogUtil.progressDialog(mContext, "测试", true);
     }
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
     }
 
 
-    @OnClick({R.id.event_bus_test_bt, R.id.a_map_test_bt})
+    @OnClick({R.id.event_bus_test_bt, R.id.a_map_test_bt, R.id.rx_Java_test_bt,
+            R.id.rx_preference_test_bt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.event_bus_test_bt:
+                //event bus
                 startActivity(new Intent(this, EventBusTestActivity.class));
                 break;
             case R.id.a_map_test_bt:
                 //高德地图
                 startActivity(new Intent(this, AMapFunctionActivity.class));
                 break;
+            case R.id.retrofit_test_bt:
+                //retrofit 2
+                startActivity(new Intent(this, RetrofitActivity.class));
+                break;
+            case R.id.green_dao_test_bt:
+                //green dao
+                break;
+            case R.id.rx_Java_test_bt:
+                //RxJava 使用Demo
+                startActivity(new Intent(this, RxJavaUseActivity.class));
+                break;
+            case R.id.rx_preference_test_bt:
+                //Rx Rx Preferences
+                startActivity(new Intent(this, RxPreferenceActivity.class));
+                break;
         }
     }
+
 }

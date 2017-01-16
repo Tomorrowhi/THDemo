@@ -149,7 +149,6 @@ public class SafetyRangeSetActivity extends BaseActivity implements GeocodeSearc
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        ButterKnife.bind(this);
         initMap(savedInstanceState);
     }
 
@@ -248,8 +247,8 @@ public class SafetyRangeSetActivity extends BaseActivity implements GeocodeSearc
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         mapView.onDestroy();
+        super.onDestroy();
     }
 
     @Override

@@ -1,26 +1,45 @@
 package com.tomorrowhi.thdemo.base;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.preference.PreferenceManager;
 
+import com.f2prateek.rx.preferences2.RxSharedPreferences;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tomorrowhi.thdemo.MyApplication;
+import com.tomorrowhi.thdemo.common.MyConstants;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * Created by zhaotaotao on 2016/11/7.
  * Activity的基类
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
 
     public MyApplication myApplication;
     public Context mContext;
+    public Unbinder unbinder;
+    public RxPermissions rxPermissions;
+    public final PublishSubject<ActivityEvent> lifePublishSubject = PublishSubject.create();
+    public RxSharedPreferences defaultRxPreferences;
+    public RxSharedPreferences userRxPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        lifePublishSubject.onNext(ActivityEvent.CREATE);
         mContext = this;
+        rxPermissions = new RxPermissions(this);
         myApplication = MyApplication.getInstance();
         setContentView(getLayoutRes());
+        unbinder = ButterKnife.bind(this);
+        initSP();
         init(savedInstanceState);
         initView();
         initData();
@@ -28,6 +47,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         initComplete(savedInstanceState);
         myApplication.addActivity(this);
     }
+
+    private void initSP() {
+        if (defaultRxPreferences == null) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+            defaultRxPreferences = RxSharedPreferences.create(preferences);
+        }
+        if (userRxPreferences == null) {
+            SharedPreferences preferences = mContext.getSharedPreferences(MyConstants.USER_INFO, Context.MODE_PRIVATE);
+            userRxPreferences = RxSharedPreferences.create(preferences);
+        }
+    }
+
+//    public <T> Observable.<T, T> bindUntileEvent()
 
     protected abstract int getLayoutRes();
 
@@ -44,9 +76,34 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         myApplication.removeActivity(this);
         myApplication.getEventBus().unregister(this);
+        unbinder.unbind();
+        lifePublishSubject.onNext(ActivityEvent.DESTROY);
+        super.onDestroy();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        lifePublishSubject.onNext(ActivityEvent.RESUME);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        lifePublishSubject.onNext(ActivityEvent.PAUSE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        lifePublishSubject.onNext(ActivityEvent.STOP);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        lifePublishSubject.onNext(ActivityEvent.START);
+    }
 }

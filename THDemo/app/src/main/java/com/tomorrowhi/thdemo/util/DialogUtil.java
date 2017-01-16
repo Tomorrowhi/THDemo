@@ -25,6 +25,9 @@ public class DialogUtil {
 
     public static void progressDialog(Context context, String showContent, boolean isCancelable) {
         hide();
+        if (progressDialog != null) {
+            return;
+        }
         progressDialog = new AlertDialog.Builder(context).create();
         progressDialog.show();
         View view = View.inflate(context, R.layout.dialog_progress_view, null);

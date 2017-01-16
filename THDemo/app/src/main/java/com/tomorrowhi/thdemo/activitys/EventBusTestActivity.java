@@ -65,8 +65,6 @@ public class EventBusTestActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
-
         fragmentManager = getFragmentManager();
         eventBusFragment = EventBusFragment.newInstance();
         fragmentManager.beginTransaction().replace(R.id.event_bus_fragment_place, eventBusFragment).commit();

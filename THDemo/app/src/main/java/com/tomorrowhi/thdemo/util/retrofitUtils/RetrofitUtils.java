@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.utils.LogUtils;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.tomorrowhi.thdemo.MyApplication;
 import com.tomorrowhi.thdemo.util.retrofitUtils.progress.ProgressHelper;
 
@@ -19,7 +20,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -51,7 +51,7 @@ public class RetrofitUtils {
                 //okhttp的进度条
                 .client(ProgressHelper.addProgress(builder).build())
 //                .client(builder.build())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(baseUrl)
 

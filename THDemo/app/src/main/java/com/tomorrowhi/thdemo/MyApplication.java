@@ -8,6 +8,7 @@ import android.support.multidex.MultiDexApplication;
 import com.blankj.utilcode.utils.LogUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 import com.blankj.utilcode.utils.Utils;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tomorrowhi.thdemo.dao.DaoMaster;
 import com.tomorrowhi.thdemo.dao.DaoSession;
@@ -37,7 +38,7 @@ public class MyApplication extends MultiDexApplication {
     public static final String BASE_URL_KEY_VALUE = "";
     public static final String BASE_URL_MAP_TYPE_AMAP = "AMap"; //高德地图
     public static boolean isLogAndDebug = true; //log和debug模式的开关
-    public static String logTag = "TH-Demo"; //log和debug模式的开关
+    public static String logTag = "TH-Demo"; //log Tag
     public static final String DB_NAME = "th—demo";
     public static final String BUG_LY = "41fccb5801";
 
@@ -67,6 +68,7 @@ public class MyApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (initLeakCanary()) return;
         applicationContext = this;
         initDebug();
         initUtils();
@@ -78,6 +80,14 @@ public class MyApplication extends MultiDexApplication {
 //        initPicasso();
         initDAO();
 //        initService();
+    }
+
+    private boolean initLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return true;
+        }
+        LeakCanary.install(this);
+        return false;
     }
 
 

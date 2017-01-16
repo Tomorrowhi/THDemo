@@ -49,12 +49,6 @@ public class AMapNavigationActivity extends BaseActivity implements AMapNaviView
     protected List<NaviLatLng> mWayPointList = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        DialogUtil.progressDialog(mContext, "正在获取路线....", true);
-    }
-
-    @Override
     protected int getLayoutRes() {
         return R.layout.activity_amap_navigation;
     }
@@ -87,11 +81,11 @@ public class AMapNavigationActivity extends BaseActivity implements AMapNaviView
 
     @Override
     protected void initView() {
+        DialogUtil.progressDialog(mContext, "正在获取路线....", true);
     }
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        ButterKnife.bind(this);
         mAMapNaviView.onCreate(savedInstanceState);
     }
 
@@ -109,10 +103,10 @@ public class AMapNavigationActivity extends BaseActivity implements AMapNaviView
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mAMapNaviView.onDestroy();
         mAMapNavi.stopNavi();
         mAMapNavi.destroy();
+        super.onDestroy();
     }
 
     @Override
