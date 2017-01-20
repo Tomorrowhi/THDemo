@@ -7,13 +7,24 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.blankj.utilcode.utils.LogUtils;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
+import com.tomorrowhi.thdemo.bean.AndroidApiTest;
+import com.tomorrowhi.thdemo.bean.ResBaseModel;
+import com.tomorrowhi.thdemo.bean.ShangHaiBean;
+import com.tomorrowhi.thdemo.util.retrofitUtils.RetrofitResult;
+import com.tomorrowhi.thdemo.util.retrofitUtils.RetrofitTools;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
 
 /**
  * Created by zhaotaotao on 10/01/2017.
@@ -36,6 +47,10 @@ public class RetrofitActivity extends BaseActivity {
     Button retrofitGet;
     @BindView(R.id.retrofit_download)
     Button retrofitDownload;
+
+
+    private List<AndroidApiTest> apiTests;
+    private ResBaseModel<ShangHaiBean> shangHaiBeanResBaseModel;
 
     @Override
     protected int getLayoutRes() {
@@ -76,9 +91,53 @@ public class RetrofitActivity extends BaseActivity {
                 //TODO retrofit 
                 break;
             case R.id.retrofit_get:
+                Observable<List<AndroidApiTest>> compose = myApplication.httpApis().androidApiTest()
+                        .compose(this.bindUntilEvent(ActivityEvent.DESTROY));
+                RetrofitTools.httpRequest(true, true, mContext, "正在加载AndroidAPI数据", mCompositeDisposable, compose, new RetrofitResult() {
+                    @Override
+                    public void handleResponse(Object object) {
+                        apiTests = (List<AndroidApiTest>) object;
+                        retrofitResultTv.setText(Arrays.toString(apiTests.toArray()));
+                    }
+
+                    @Override
+                    public void handleError(Throwable error) {
+                        LogUtils.d(error.toString());
+                    }
+
+                    @Override
+                    public void handleComplete() {
+                        LogUtils.d("请求结束2");
+                    }
+                });
+                Observable<ResBaseModel<ShangHaiBean>> demo = myApplication.httpApis().getShanghaiData("demo")
+                        .compose(this.bindUntilEvent(ActivityEvent.DESTROY));
+                RetrofitTools.httpCommonRequest(false, false, null, null,
+                        mCompositeDisposable, demo, new RetrofitResult() {
+
+                            @Override
+                            public void handleResponse(Object object) {
+                                if (object != null) {
+                                    shangHaiBeanResBaseModel = (ResBaseModel<ShangHaiBean>) object;
+                                    LogUtils.d("shangHaiBeanResBaseModel:" + shangHaiBeanResBaseModel.toString());
+                                }
+                            }
+
+                            @Override
+                            public void handleError(Throwable error) {
+                                LogUtils.d(error.toString());
+                            }
+
+                            @Override
+                            public void handleComplete() {
+                                LogUtils.d("请求结束3");
+                            }
+                        });
                 break;
             case R.id.retrofit_download:
                 break;
         }
     }
+
+
 }

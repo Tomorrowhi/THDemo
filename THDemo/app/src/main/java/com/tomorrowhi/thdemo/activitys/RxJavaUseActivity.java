@@ -2,8 +2,6 @@ package com.tomorrowhi.thdemo.activitys;
 
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.blankj.utilcode.utils.LogUtils;
@@ -13,7 +11,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.common.MyConstants;
-import com.tomorrowhi.thdemo.interfaces.ApiService;
+import com.tomorrowhi.thdemo.util.retrofitUtils.ApiService;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import org.reactivestreams.Publisher;
@@ -25,7 +23,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
@@ -122,6 +119,14 @@ public class RxJavaUseActivity extends BaseActivity {
                         LogUtils.d("subscribe along" + s);
                     }
                 });
+        Flowable<String> just = Flowable.just("213");
+        just.compose(this.<String>bindUntilEvent(ActivityEvent.PAUSE))
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+
+                    }
+                });
     }
 
     private void method_4() {
@@ -202,9 +207,11 @@ public class RxJavaUseActivity extends BaseActivity {
             @Override
             public void subscribe(FlowableEmitter<String> e) throws Exception {
                 e.onNext("3秒后显示");
+                e.onComplete();
+                LogUtils.d("3秒后显示");
                 SystemClock.sleep(3000);
                 e.onNext("thDemo");
-                e.onComplete();
+//                e.onComplete();
             }
         }, BackpressureStrategy.BUFFER)
                 //指定发送数据是在IO线程（某个子线程）

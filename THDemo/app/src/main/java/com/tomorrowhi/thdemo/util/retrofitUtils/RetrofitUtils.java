@@ -39,25 +39,24 @@ public class RetrofitUtils {
     /**
      * 创建retrofit对象
      *
-     * @param service api接口
      * @param baseUrl 请求的域名地址
      * @param isLog   日志开关
-     * @param <T>     泛型标记
      * @return retrofit对象
      */
-    public static <T> T createRetrofitService(final Class<T> service, String baseUrl, boolean isLog, Context context) {
+    public static Retrofit createRetrofit(String baseUrl,
+                                          boolean isLog,
+                                          Context context) {
+
         OkHttpClient.Builder builder = getOkHttpBuilder(isLog, context);
-        Retrofit retrofit = new Retrofit.Builder()
+
+        return new Retrofit.Builder()
                 //okhttp的进度条
                 .client(ProgressHelper.addProgress(builder).build())
 //                .client(builder.build())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(baseUrl)
-
                 .build();
-
-        return retrofit.create(service);
     }
 
     @NonNull
@@ -83,14 +82,14 @@ public class RetrofitUtils {
                 if (NetworkUtil.isNetworkAvailable(context)) {
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_NETWORK)//有网络时只从网络获取
-                            .addHeader(MyApplication.BASE_URL_KEY, MyApplication.BASE_URL_KEY_VALUE)
+//                            .addHeader(MyApplication.BASE_URL_KEY, MyApplication.BASE_URL_KEY_VALUE)
                             .addHeader("Accept", "application/json")
                             .addHeader("Content-Type", "application/json")
                             .build();
                 } else {
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)//无网络时只从缓存中读取
-                            .addHeader(MyApplication.BASE_URL_KEY, MyApplication.BASE_URL_KEY_VALUE)
+//                            .addHeader(MyApplication.BASE_URL_KEY, MyApplication.BASE_URL_KEY_VALUE)
                             .addHeader("Accept", "application/json")
                             .addHeader("Content-Type", "application/json")
                             .build();

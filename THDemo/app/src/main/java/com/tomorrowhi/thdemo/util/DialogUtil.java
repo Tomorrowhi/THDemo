@@ -17,17 +17,13 @@ public class DialogUtil {
 
     public static void hide() {
         if (progressDialog != null) {
-            progressDialog.cancel();
             progressDialog.dismiss();
             progressDialog = null;
         }
     }
 
-    public static void progressDialog(Context context, String showContent, boolean isCancelable) {
+    public static AlertDialog progressDialog(Context context, String showContent, boolean isCancelable) {
         hide();
-        if (progressDialog != null) {
-            return;
-        }
         progressDialog = new AlertDialog.Builder(context).create();
         progressDialog.show();
         View view = View.inflate(context, R.layout.dialog_progress_view, null);
@@ -36,6 +32,7 @@ public class DialogUtil {
         progressDialog.setContentView(view);
         progressDialog.setCanceledOnTouchOutside(isCancelable);
         progressDialog.setCancelable(isCancelable);
+        return progressDialog;
     }
 
 

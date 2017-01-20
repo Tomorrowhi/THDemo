@@ -9,11 +9,13 @@ import com.f2prateek.rx.preferences2.RxSharedPreferences;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tomorrowhi.thdemo.MyApplication;
 import com.tomorrowhi.thdemo.common.MyConstants;
+import com.tomorrowhi.thdemo.util.DialogUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.PublishSubject;
 
 /**
@@ -29,6 +31,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     public final PublishSubject<ActivityEvent> lifePublishSubject = PublishSubject.create();
     public RxSharedPreferences defaultRxPreferences;
     public RxSharedPreferences userRxPreferences;
+    public CompositeDisposable mCompositeDisposable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         myApplication = MyApplication.getInstance();
         setContentView(getLayoutRes());
         unbinder = ButterKnife.bind(this);
+        mCompositeDisposable = new CompositeDisposable();
         initSP();
         init(savedInstanceState);
         initView();
@@ -59,7 +64,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         }
     }
 
-//    public <T> Observable.<T, T> bindUntileEvent()
 
     protected abstract int getLayoutRes();
 
@@ -80,6 +84,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         myApplication.getEventBus().unregister(this);
         unbinder.unbind();
         lifePublishSubject.onNext(ActivityEvent.DESTROY);
+        DialogUtil.hide();
+        mCompositeDisposable.clear();
         super.onDestroy();
     }
 

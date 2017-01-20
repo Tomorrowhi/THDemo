@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.utils.ToastUtils;
 import com.f2prateek.rx.preferences2.Preference;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
@@ -14,7 +15,6 @@ import com.tomorrowhi.thdemo.common.MyConstants;
 import com.tomorrowhi.thdemo.util.DialogUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
@@ -31,6 +31,10 @@ public class MainActivity extends BaseActivity {
     Button rxJavaTestBt;
     @BindView(R.id.rx_preference_test_bt)
     Button rxPreferenceTestBt;
+    @BindView(R.id.rx_bus_test_bt)
+    Button rxBusTestBt;
+    @BindView(R.id.singleton_test_bt)
+    Button singletonTestBt;
 
     @Override
     protected int getLayoutRes() {
@@ -79,7 +83,7 @@ public class MainActivity extends BaseActivity {
 
 
     @OnClick({R.id.event_bus_test_bt, R.id.a_map_test_bt, R.id.rx_Java_test_bt,
-            R.id.rx_preference_test_bt})
+            R.id.rx_preference_test_bt,R.id.singleton_test_bt,R.id.retrofit_test_bt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.event_bus_test_bt:
@@ -102,8 +106,17 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, RxJavaUseActivity.class));
                 break;
             case R.id.rx_preference_test_bt:
-                //Rx Rx Preferences
+                //RxPreferences
                 startActivity(new Intent(this, RxPreferenceActivity.class));
+                break;
+            case R.id.rx_bus_test_bt:
+                //RxBus
+                ToastUtils.showShortToast("RxBus 需要适配RxJava 2.0");
+//                startActivity(new Intent(this, RxBusTestActivity.class));
+                break;
+            case R.id.singleton_test_bt:
+                ToastUtils.showShortToast("单例模式的应用，请看代码");
+                startActivity(new Intent(this, SingletonTestActivity.class));
                 break;
         }
     }

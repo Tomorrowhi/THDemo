@@ -15,7 +15,8 @@ import com.tomorrowhi.thdemo.dao.DaoSession;
 import com.tomorrowhi.thdemo.interfaces.RetrofitApis;
 import com.tomorrowhi.thdemo.util.GreenDaoUtils.GreenDaoOptionHelper;
 import com.tomorrowhi.thdemo.util.imageLoderUtils.PicassoUtil;
-import com.tomorrowhi.thdemo.util.retrofitUtils.RetrofitUtils;
+import com.tomorrowhi.thdemo.util.retrofitUtils.ComApi;
+import com.tomorrowhi.thdemo.util.retrofitUtils.ComInterface;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.greendao.database.Database;
@@ -32,7 +33,7 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class MyApplication extends MultiDexApplication {
 
-    public static final String BASE_URL = "http://openapi.5gcity.com/";
+    public static final String BASE_URL = "https://api.waqi.info";
     public static final String BASE_URL_APPID = "";
     public static final String BASE_URL_KEY = "";
     public static final String BASE_URL_KEY_VALUE = "";
@@ -44,7 +45,7 @@ public class MyApplication extends MultiDexApplication {
 
     private static MyApplication application;
     private static Context applicationContext;
-    private RetrofitApis apis;
+    private ComInterface comApi;
     private EventBus eventBus;
     private DaoSession daoSession;
     private Database db;
@@ -157,11 +158,11 @@ public class MyApplication extends MultiDexApplication {
     }
 
 
-    public RetrofitApis HttpApis() {
-        if (null == apis) {
+    public ComInterface httpApis() {
+        if (null == comApi) {
             initApisCache();
         }
-        return apis;
+        return comApi;
     }
 
 
@@ -190,8 +191,7 @@ public class MyApplication extends MultiDexApplication {
      * 初始化网络接口服务
      */
     private void initApisCache() {
-        apis = RetrofitUtils.createRetrofitService(RetrofitApis.class,
-                BASE_URL, isLogAndDebug, applicationContext);
+        comApi = ComApi.getInstance(applicationContext, BASE_URL, isLogAndDebug).getApi();
     }
 
     public String getLanguage() {

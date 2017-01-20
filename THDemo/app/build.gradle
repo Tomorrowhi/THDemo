@@ -147,7 +147,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //retrofit2
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.2'
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'com.squareup.okio:okio:1.11.0'
@@ -203,9 +202,7 @@ dependencies {
     compile 'com.blankj:utilcode:latest.release'
     //Jpush
     compile 'cn.jiguang.sdk:jpush:3.0.0'
-    // 此处以JPush 3.0.0 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.0.0'
-    // 此处以JCore 1.0.0 版本为例。
 
 }
 

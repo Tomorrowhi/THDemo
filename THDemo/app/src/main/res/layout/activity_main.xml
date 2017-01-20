@@ -43,6 +43,16 @@
                 android:id="@+id/rx_preference_test_bt"
                 style="@style/main_bt_style"
                 android:text="RxPreferences test" />
+
+            <Button
+                android:id="@+id/rx_bus_test_bt"
+                style="@style/main_bt_style"
+                android:text="RxBus test" />
+
+            <Button
+                android:id="@+id/singleton_test_bt"
+                style="@style/main_bt_style"
+                android:text="单例模式" />
         </LinearLayout>
 
 

@@ -66,6 +66,8 @@
         <activity android:name=".activitys.SafetyRangeSetActivity" />
         <activity android:name=".activitys.RxJavaUseActivity" />
         <activity android:name=".activitys.RxPreferenceActivity" />
+        <activity android:name=".activitys.SingletonTestActivity" />
+        <activity android:name=".activitys.RetrofitActivity" />
 
         <!--高德SDK KEY相关-->
         <meta-data
