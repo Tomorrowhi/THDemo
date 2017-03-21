@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.PublishSubject;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by zhaotaotao on 2016/11/7.
@@ -111,5 +112,10 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected void onStart() {
         super.onStart();
         lifePublishSubject.onNext(ActivityEvent.START);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

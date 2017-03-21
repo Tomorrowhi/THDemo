@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_1"
@@ -32,7 +33,9 @@
             <Button
                 android:id="@+id/retrofit_test_bt"
                 style="@style/main_bt_style"
-                android:text="retrofit test" />
+                fontPath="fonts/JianKaTong.ttf"
+                android:text="retrofit test"
+                tools:ignore="MissingPrefix" />
 
             <Button
                 android:id="@+id/rx_Java_test_bt"
@@ -52,7 +55,9 @@
             <Button
                 android:id="@+id/singleton_test_bt"
                 style="@style/main_bt_style"
-                android:text="单例模式" />
+                android:text="单例模式"
+                fontPath="fonts/JianKaTong.ttf"
+                tools:ignore="MissingPrefix" />
         </LinearLayout>
 
 

@@ -1,6 +1,7 @@
 package com.tomorrowhi.thdemo.activitys;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.tomorrowhi.thdemo.util.DialogUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends BaseActivity {
 
@@ -120,5 +122,6 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
+
 
 }

@@ -24,6 +24,17 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class RetrofitTools {
 
+    /**
+     * 同意针对结果判断返回值中的state
+     *
+     * @param isShowProgress       是否显示进度条 true显示
+     * @param isCancelRequest      进度条是否可以取消
+     * @param context              context
+     * @param showContent          进度条现显示的内容
+     * @param mCompositeDisposable CompositeDisposable
+     * @param request              request
+     * @param result               resultCallBack
+     */
     public static void httpRequest(boolean isShowProgress, boolean isCancelRequest, Context context, String showContent,
                                    CompositeDisposable mCompositeDisposable,
                                    Observable request, RetrofitResult result) {
@@ -43,6 +54,7 @@ public class RetrofitTools {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
                                 DialogUtil.hide();
+                                ToastUtils.showShortToast("请求失败，请稍后重试");
                                 result.handleError(throwable);
                             }
                         },
@@ -61,6 +73,17 @@ public class RetrofitTools {
                 ));
     }
 
+    /**
+     * 同意针对结果判断返回值中的state
+     *
+     * @param isShowProgress       是否显示进度条 true显示
+     * @param isCancelRequest      进度条是否可以取消
+     * @param context              context
+     * @param showContent          进度条现显示的内容
+     * @param mCompositeDisposable CompositeDisposable
+     * @param request              request
+     * @param result               resultCallBack
+     */
     public static void httpCommonRequest(boolean isShowProgress, boolean isCancelRequest, Context context, String showContent,
                                          CompositeDisposable mCompositeDisposable,
                                          Observable request, RetrofitResult result) {
@@ -87,6 +110,7 @@ public class RetrofitTools {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
                                 DialogUtil.hide();
+                                ToastUtils.showShortToast("请求失败，请稍后重试");
                                 result.handleError(throwable);
                             }
                         },

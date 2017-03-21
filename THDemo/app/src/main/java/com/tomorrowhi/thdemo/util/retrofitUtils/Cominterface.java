@@ -1,6 +1,7 @@
 package com.tomorrowhi.thdemo.util.retrofitUtils;
 
 import com.tomorrowhi.thdemo.bean.AndroidApiTest;
+import com.tomorrowhi.thdemo.bean.Repos;
 import com.tomorrowhi.thdemo.bean.ResBaseModel;
 import com.tomorrowhi.thdemo.bean.ShangHaiBean;
 
@@ -21,4 +22,7 @@ public interface ComInterface {
 
     @GET("https://api.learn2crack.com/android/jsonarray")
     Observable<List<AndroidApiTest>> androidApiTest();
+
+    @GET("https://api.github.com/users/octocat/repos")
+    Observable<Repos> getRepos();
 }

@@ -65,7 +65,7 @@ public class RxJavaUseActivity extends BaseActivity {
         method_5();
         Preference<Long> appId = defaultRxPreferences.getLong(MyConstants.APP_ID);
         Preference<Boolean> showWhatsNew = defaultRxPreferences.getBoolean("show-whats-new", true);
-        Preference<String> username = defaultRxPreferences.getString("username",MyConstants.DEFAULT);
+        Preference<String> username = defaultRxPreferences.getString("username", MyConstants.DEFAULT);
 
         username.asObservable().subscribe(new Consumer<String>() {
             @Override
@@ -105,7 +105,7 @@ public class RxJavaUseActivity extends BaseActivity {
                 .doOnNext(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        LogUtils.d("doOnNext along" + aLong);
+                        LogUtils.d("SECONDS doOnNext along" + aLong);
                     }
                 }).flatMap(new Function<Long, Publisher<String>>() {
             @Override

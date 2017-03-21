@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/purple_2</item>
     </style>
 
+    <style name="TextAppearance.FontPath_zh" parent="android:TextAppearance">
+        <item name="fontPath">fonts/JianKaTong.ttf</item>
+    </style>
+
+
     <style name="main_bt_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

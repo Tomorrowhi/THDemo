@@ -12,7 +12,6 @@ import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tomorrowhi.thdemo.dao.DaoMaster;
 import com.tomorrowhi.thdemo.dao.DaoSession;
-import com.tomorrowhi.thdemo.interfaces.RetrofitApis;
 import com.tomorrowhi.thdemo.util.GreenDaoUtils.GreenDaoOptionHelper;
 import com.tomorrowhi.thdemo.util.imageLoderUtils.PicassoUtil;
 import com.tomorrowhi.thdemo.util.retrofitUtils.ComApi;
@@ -26,6 +25,7 @@ import java.util.List;
 import java.util.Locale;
 
 import cn.jpush.android.api.JPushInterface;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by zhaotaotao on 09/01/2017.
@@ -73,6 +73,7 @@ public class MyApplication extends MultiDexApplication {
         applicationContext = this;
         initDebug();
         initUtils();
+        initDefaultFont();
         initEventBus();
         initApisCache();
         initBugLy();
@@ -81,6 +82,14 @@ public class MyApplication extends MultiDexApplication {
 //        initPicasso();
         initDAO();
 //        initService();
+    }
+
+    private void initDefaultFont() {
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/Roboto-RobotoRegular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
     }
 
     private boolean initLeakCanary() {
@@ -149,6 +158,7 @@ public class MyApplication extends MultiDexApplication {
     private void initJPush() {
         JPushInterface.setDebugMode(isLogAndDebug);
         JPushInterface.init(this);
+        JPushInterface.setLatestNotificationNumber(this, 5);//设置最近保留的通知条数
     }
 
     private void initPicasso() {

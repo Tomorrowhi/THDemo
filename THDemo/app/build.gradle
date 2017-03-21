@@ -23,7 +23,7 @@ def apkName = "thdemo"
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.tomorrowhi.thdemo"
         minSdkVersion 17
@@ -112,15 +112,50 @@ android {
     }
 
     productFlavors {
+        thDemoOne{
+            applicationId "com.tomorrowhi.thdemo.one"
+            versionCode 2
+            versionName "2.0"
+        }
+
+        thDemoTwo{
+            applicationId "com.tomorrowhi.thdemo.two"
+            versionCode 1
+            versionName "1.0"
+        }
+
     }
 
     sourceSets { main { jni.srcDirs = ['src/main/jni', 'src/main/jni/'] } }
 
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
-//        resolutionStrategy.force 'io.reactivex.rxjava2:rxjava:2.0.4'
     }
 }
+
+//读取签名配置文件
+def getSigningProperties() {
+
+    def propFile = file('../gradle.properties')
+    if (propFile.canRead()) {
+        def Properties props = new Properties()
+        props.load(new FileInputStream(propFile))
+        if (props != null && props.containsKey('RELEASE_STORE_FILE') && props.containsKey('RELEASE_STORE_PASSWORD') &&
+                props.containsKey('RELEASE_KEY_ALIAS') && props.containsKey('RELEASE_KEY_PASSWORD')) {
+            android.signingConfigs.config.storeFile = file(props['RELEASE_STORE_FILE'])
+            android.signingConfigs.config.storePassword = props['RELEASE_STORE_PASSWORD']
+            android.signingConfigs.config.keyAlias = props['RELEASE_KEY_ALIAS']
+            android.signingConfigs.config.keyPassword = props['RELEASE_KEY_PASSWORD']
+        } else {
+            println 'gradle.properties found but some entries are missing'
+            android.buildTypes.release.signingConfig = null
+        }
+    } else {
+        println 'gradle.properties not found'
+        android.buildTypes.release.signingConfig = null
+    }
+}
+
 
 apt {
     arguments {
@@ -140,9 +175,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //support
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:support-v4:25.1.0'
-    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support:support-v4:25.3.0'
+    compile 'com.android.support:design:25.3.0'
     compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
     //retrofit2
@@ -203,6 +238,10 @@ dependencies {
     //Jpush
     compile 'cn.jiguang.sdk:jpush:3.0.0'
     compile 'cn.jiguang.sdk:jcore:1.0.0'
+    //全局替换字体
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+    //googleMap
+    compile 'com.google.android.gms:play-services-maps:10.2.0'
 
 }
 

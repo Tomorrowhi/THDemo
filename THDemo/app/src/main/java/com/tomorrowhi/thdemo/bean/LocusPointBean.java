@@ -1,4 +1,4 @@
-package com.tomorrowhi.thdemo.base;
+package com.tomorrowhi.thdemo.bean;
 
 /**
  * Created by zhaotaotao on 10/01/2017.

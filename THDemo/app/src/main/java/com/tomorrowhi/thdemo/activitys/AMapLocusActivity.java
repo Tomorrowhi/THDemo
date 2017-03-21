@@ -27,7 +27,7 @@ import com.amap.api.services.geocoder.RegeocodeResult;
 import com.blankj.utilcode.utils.LogUtils;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
-import com.tomorrowhi.thdemo.base.LocusPointBean;
+import com.tomorrowhi.thdemo.bean.LocusPointBean;
 import com.tomorrowhi.thdemo.util.locationUtiils.LocationUtil;
 
 import org.greenrobot.eventbus.Subscribe;
