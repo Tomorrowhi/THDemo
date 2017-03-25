@@ -74,6 +74,9 @@ public class GoogleMapFunctionActivity extends BaseActivity {
         chinaOutPoint.add(new LocusPointBean(13.692676, 100.547647, false));
         chinaOutPoint.add(new LocusPointBean(13.696009, 100.546608, true));
         chinaOutPoint.add(new LocusPointBean(13.700332, 100.546065, false));
+        chinaOutPoint.add(new LocusPointBean(13.701332, 100.546065, false));
+        chinaOutPoint.add(new LocusPointBean(13.701332, 100.546065, false));
+        chinaOutPoint.add(new LocusPointBean(13.701332, 100.546065, false));
         //中国
         chinaPoint.add(new LocusPointBean(22.565775, 113.868695, false));
         chinaPoint.add(new LocusPointBean(22.566703, 113.869076, false));
@@ -84,6 +87,9 @@ public class GoogleMapFunctionActivity extends BaseActivity {
         chinaPoint.add(new LocusPointBean(22.570538, 113.868739, false));
         chinaPoint.add(new LocusPointBean(22.571099, 113.86801, true));
         chinaPoint.add(new LocusPointBean(22.573148, 113.866793, false));
+        chinaPoint.add(new LocusPointBean(22.574148, 113.866793, false));
+        chinaPoint.add(new LocusPointBean(22.575148, 113.866793, false));
+        chinaPoint.add(new LocusPointBean(22.576148, 113.866793, false));
         //中国边界
         chinaBorderPoint.add(new LocusPointBean(22.694338, 106.868702, false));
         chinaBorderPoint.add(new LocusPointBean(22.670798, 106.834681, false));
@@ -92,6 +98,10 @@ public class GoogleMapFunctionActivity extends BaseActivity {
         chinaBorderPoint.add(new LocusPointBean(22.62588, 106.698983, false));
         chinaBorderPoint.add(new LocusPointBean(22.646304, 106.614021, false));
         chinaBorderPoint.add(new LocusPointBean(22.632575, 106.527364, false));
+        chinaBorderPoint.add(new LocusPointBean(22.633575, 106.527364, false));
+        chinaBorderPoint.add(new LocusPointBean(22.63475, 106.527364, false));
+        chinaBorderPoint.add(new LocusPointBean(22.635575, 106.527364, false));
+        chinaBorderPoint.add(new LocusPointBean(22.636575, 106.527364, false));
     }
 
 

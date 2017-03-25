@@ -13,10 +13,8 @@ import com.f2prateek.rx.preferences2.Preference;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.common.MyConstants;
-import com.tomorrowhi.thdemo.util.DialogUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
@@ -79,7 +77,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        DialogUtil.progressDialog(mContext, "测试", true);
+
+//        DialogUtil.progressDialog(mContext, "测试", true);
     }
 
     @Override
@@ -131,11 +130,4 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
