@@ -40,5 +40,4 @@ captures/
 *.jks
 .DS_Store
 .idea/
-THDemo/app/libs/
-THDemo/app/src/main/res/drawable/
+

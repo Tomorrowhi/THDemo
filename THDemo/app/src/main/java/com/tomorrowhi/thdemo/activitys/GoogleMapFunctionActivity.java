@@ -18,8 +18,8 @@ import butterknife.OnClick;
 
 /**
  * Created by zhaotaotao on 2017/3/25.
+ * googleMap功能测试
  */
-
 public class GoogleMapFunctionActivity extends BaseActivity {
 
     @BindView(R.id.title_return_iv)
