@@ -31,7 +31,6 @@ import com.tomorrowhi.thdemo.util.locationUtiils.LocationUtil;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -242,6 +241,7 @@ public class SafetyRangeSetActivity extends BaseActivity implements GeocodeSearc
     public void onMapClick(LatLng latLng) {
         watchLatlng = latLng;
         addWatchMarkersToMap();
+        LogUtils.d("经纬度信息：" + watchLatlng.latitude + "," + watchLatlng.longitude);
         createCircle(watchLatlng, defaultRadius);
     }
 

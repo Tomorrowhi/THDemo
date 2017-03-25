@@ -1,13 +1,13 @@
 package com.tomorrowhi.thdemo.activitys;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.utils.PhoneUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 import com.f2prateek.rx.preferences2.Preference;
 import com.tomorrowhi.thdemo.R;
@@ -16,8 +16,8 @@ import com.tomorrowhi.thdemo.common.MyConstants;
 import com.tomorrowhi.thdemo.util.DialogUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends BaseActivity {
 
@@ -37,6 +37,8 @@ public class MainActivity extends BaseActivity {
     Button rxBusTestBt;
     @BindView(R.id.singleton_test_bt)
     Button singletonTestBt;
+    @BindView(R.id.google_map_test_bt)
+    Button mGoogleMapTestBt;
 
     @Override
     protected int getLayoutRes() {
@@ -72,6 +74,7 @@ public class MainActivity extends BaseActivity {
                 });
         Preference<Long> appId = defaultRxPreferences.getLong(MyConstants.APP_ID);
         LogUtils.d("main Activity appId:" + appId.get());
+        LogUtils.d("getPhoneStr:" + PhoneUtils.getPhoneStatus());
     }
 
     @Override
@@ -85,7 +88,8 @@ public class MainActivity extends BaseActivity {
 
 
     @OnClick({R.id.event_bus_test_bt, R.id.a_map_test_bt, R.id.rx_Java_test_bt,
-            R.id.rx_preference_test_bt,R.id.singleton_test_bt,R.id.retrofit_test_bt})
+            R.id.rx_preference_test_bt, R.id.singleton_test_bt, R.id.retrofit_test_bt,
+            R.id.google_map_test_bt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.event_bus_test_bt:
@@ -120,8 +124,18 @@ public class MainActivity extends BaseActivity {
                 ToastUtils.showShortToast("单例模式的应用，请看代码");
                 startActivity(new Intent(this, SingletonTestActivity.class));
                 break;
+            case R.id.google_map_test_bt:
+                //Google地图
+                startActivity(new Intent(this, GoogleMapFunctionActivity.class));
+                break;
         }
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

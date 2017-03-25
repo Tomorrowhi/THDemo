@@ -13,4 +13,6 @@ public class MyConstants {
 
     public static final String NAVIGATION_LATLNG = "navigation_latlng"; //导航点
     public static final String APP_LOCATION_LATLNG = "app_location_latlng"; //app本身位置
+
+    public static final String POINT_LIST = "point_list"; //传输点列表
 }

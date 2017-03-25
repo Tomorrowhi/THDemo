@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white_1"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white_1"
+              android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,46 +18,53 @@
             <Button
                 android:id="@+id/event_bus_test_bt"
                 style="@style/main_bt_style"
-                android:text="EventBus 3.0 test" />
+                android:text="EventBus 3.0 test"/>
 
             <Button
                 android:id="@+id/a_map_test_bt"
                 style="@style/main_bt_style"
-                android:text="高德地图 test" />
+                android:text="高德地图 test"/>
 
             <Button
                 android:id="@+id/green_dao_test_bt"
                 style="@style/main_bt_style"
-                android:text="green Dao test" />
+                android:text="green Dao test"/>
 
             <Button
                 android:id="@+id/retrofit_test_bt"
                 style="@style/main_bt_style"
                 fontPath="fonts/JianKaTong.ttf"
                 android:text="retrofit test"
-                tools:ignore="MissingPrefix" />
+                tools:ignore="MissingPrefix"/>
 
             <Button
                 android:id="@+id/rx_Java_test_bt"
                 style="@style/main_bt_style"
-                android:text="RxJava test" />
+                android:text="RxJava test"/>
 
             <Button
                 android:id="@+id/rx_preference_test_bt"
                 style="@style/main_bt_style"
-                android:text="RxPreferences test" />
+                android:text="RxPreferences test"/>
 
             <Button
                 android:id="@+id/rx_bus_test_bt"
                 style="@style/main_bt_style"
-                android:text="RxBus test" />
+                android:text="RxBus test"/>
 
             <Button
                 android:id="@+id/singleton_test_bt"
                 style="@style/main_bt_style"
-                android:text="单例模式"
                 fontPath="fonts/JianKaTong.ttf"
-                tools:ignore="MissingPrefix" />
+                android:text="单例模式"
+                tools:ignore="MissingPrefix"/>
+
+            <Button
+                android:id="@+id/google_map_test_bt"
+                style="@style/main_bt_style"
+                fontPath="fonts/JianKaTong.ttf"
+                android:text="google地图"
+                tools:ignore="MissingPrefix"/>
         </LinearLayout>
 
 

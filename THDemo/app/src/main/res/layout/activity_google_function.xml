@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout style="@style/title_tab_style">
+
+        <include layout="@layout/title_return_iv"/>
+
+        <TextView
+            style="@style/title_center_desc"
+            android:text="GoogleMap Function"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/china_point_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="国内数据"
+        />
+
+    <Button
+        android:id="@+id/china_out_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="国外数据"
+        />
+
+    <Button
+        android:id="@+id/china_border_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="跨国数据"
+        />
+
+</LinearLayout>

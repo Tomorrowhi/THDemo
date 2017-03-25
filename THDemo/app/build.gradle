@@ -1,11 +1,8 @@
 import java.text.SimpleDateFormat
 
 apply plugin: 'com.android.application'
-//apply plugin: 'com.jakewharton.butterknife'
-//apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'bugly'
-//apply plugin: 'me.tatarka.retrolambda'
 
 bugly {
     appId = '41fccb5801'
@@ -42,7 +39,7 @@ android {
         }
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
-                JPUSH_APPKEY : "061e7cc7593e0f93ee2e1c11", //JPush上注册的包名对应的appkey.
+                JPUSH_APPKEY : "e6c65d06b7175c8ddf03de53", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
 
@@ -119,18 +116,24 @@ android {
     }
 
     productFlavors {
-        thDemoOne{
-            applicationId "com.tomorrowhi.thdemo.one"
-            versionCode 2
-            versionName "2.0"
-        }
-
-        thDemoTwo{
+        thDemoTwo {
             applicationId "com.tomorrowhi.thdemo.two"
+            minSdkVersion 17
             versionCode 1
             versionName "1.0"
         }
-
+        thDemothree {
+            minSdkVersion 17
+            applicationId 'com.tomorrowhi.thdemo.three'
+            versionCode 1
+            versionName '1.0'
+        }
+        thdemo {
+            minSdkVersion 17
+            applicationId 'com.tomorrowhi.thdemo'
+            versionCode 1
+            versionName '1.0'
+        }
     }
 
     sourceSets { main { jni.srcDirs = ['src/main/jni', 'src/main/jni/'] } }
@@ -162,7 +165,6 @@ def getSigningProperties() {
         android.buildTypes.release.signingConfig = null
     }
 }
-
 
 //apt {
 //    arguments {
@@ -199,14 +201,14 @@ dependencies {
     //RxAndroid
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //RxBinding 暂不支持RxJava2
-//    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:1.0.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:1.0.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-design:1.0.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:1.0.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-leanback-v17:1.0.0'
+    //    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+    //    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:1.0.0'
+    //    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:1.0.0'
+    //    compile 'com.jakewharton.rxbinding:rxbinding-design:1.0.0'
+    //    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:1.0.0'
+    //    compile 'com.jakewharton.rxbinding:rxbinding-leanback-v17:1.0.0'
     //sqlbrite 暂不支持RxJava2
-//    compile 'com.squareup.sqlbrite:sqlbrite:1.1.1'
+    //    compile 'com.squareup.sqlbrite:sqlbrite:1.1.1'
     //butterknife
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
@@ -247,8 +249,7 @@ dependencies {
     //xrecyclerview
     compile 'com.jcodecraeer:xrecyclerview:1.3.2'
     //googleMap
-    compile 'com.google.android.gms:play-services-maps:10.2.0'
-
+    compile 'com.google.android.gms:play-services-maps:10.2.1'
 }
 
 
