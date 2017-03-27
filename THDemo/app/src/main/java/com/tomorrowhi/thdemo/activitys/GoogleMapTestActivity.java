@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.amap.api.location.CoordinateConverter;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapOptions;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -24,12 +25,6 @@ import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
-import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.geocoder.GeocodeResult;
-import com.amap.api.services.geocoder.GeocodeSearch;
-import com.amap.api.services.geocoder.RegeocodeQuery;
-import com.amap.api.services.geocoder.RegeocodeResult;
-import com.blankj.utilcode.utils.LogUtils;
 import com.blankj.utilcode.utils.ScreenUtils;
 import com.blankj.utilcode.utils.SizeUtils;
 import com.blankj.utilcode.utils.ToastUtils;
@@ -53,7 +48,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCallback, GeocodeSearch.OnGeocodeSearchListener {
+public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCallback {
 
     @BindView(R.id.title_return_iv)
     ImageButton mTitleReturnIv;
@@ -81,20 +76,16 @@ public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCal
     private TextureMapView mAMapView;
     private AMap aMap;
     private PolylineOptions options;
-    private GeocodeSearch geocoderSearch;
     private MarkerOptions watchMarkerOptionStart, watchMarkerOptionEnd, watchMarkerOptionPoint;
     private Marker startmarker, endMarker, redMarker;
 
     //公共
-
     private List<LocusPointBean> nowUsePoint = new ArrayList<>();
     private LinearLayout.LayoutParams mParams;
-    private View pointView, watchMarkerViewStart, watchMarkerViewEnd;
     private float zoom = 10;
     private double latitude = 39.23242;
     private double longitude = 116.253654;
     private boolean mIsAmapDisplay = true;  //标记当前使用的是那个地图
-    private boolean mIsAuto = true;
 
     @Override
     protected int getLayoutRes() {
@@ -129,8 +120,6 @@ public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCal
     protected void initView() {
         mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-        geocoderSearch = new GeocodeSearch(this);
-        geocoderSearch.setOnGeocodeSearchListener(this);
     }
 
     @Override
@@ -292,16 +281,18 @@ public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCal
         addWatchMarkersEndToMap(beanList.get(beanList.size() - 1));
         addWatchMarkersStartToMap(beanList.get(0));
         zoomToSpanWithCenter(endMarker, latLngs.get(latLngs.size() - 1), latLngs);
-        mGoogleMapView.animate().alpha(0f).setDuration(500).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mGoogleMapView.setVisibility(View.GONE);
-                mMapContainer.removeView(mGoogleMapView);
-                if (mGoogleMapView != null) {
-                    mGoogleMapView.onDestroy();
+        if (mGoogleMapView != null) {
+            mGoogleMapView.animate().alpha(0f).setDuration(500).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mGoogleMapView.setVisibility(View.GONE);
+                    mMapContainer.removeView(mGoogleMapView);
+                    if (mGoogleMapView != null) {
+                        mGoogleMapView.onDestroy();
+                    }
                 }
-            }
-        });
+            });
+        }
         mIsAmapDisplay = true;
     }
 
@@ -433,7 +424,15 @@ public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCal
 
     private void getPointDesc(List<LocusPointBean> beanList) {
         LocusPointBean locusPointBean = beanList.get(0);
-        getAddress(new LatLonPoint(locusPointBean.getLat(), locusPointBean.getLng()));
+        boolean isAMapDataAvailable = CoordinateConverter.isAMapDataAvailable(locusPointBean.getLat(), locusPointBean.getLng());
+        if (isAMapDataAvailable) {
+            //true代表当前位置在大陆、港澳地区，反之不在。
+            ToastUtils.showShortToast("第一位点为国内点，建议使用高德");
+            changeToAmapView(nowUsePoint);
+        } else {
+            ToastUtils.showShortToast("第一位点为国外点，建议使用Google");
+            changeToGoogleMapView(nowUsePoint);
+        }
     }
 
     /**
@@ -490,48 +489,6 @@ public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCal
                 .draggable(false)
                 .anchor(0.5f, 0.5f);
         redMarker = aMap.addMarker(watchMarkerOptionPoint);
-    }
-
-
-    /**
-     * 获取指定坐标的逆地理位置编码
-     *
-     * @param latLonPoint 坐标
-     */
-    public void getAddress(final LatLonPoint latLonPoint) {
-        RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 10,
-                GeocodeSearch.AMAP);// 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
-        geocoderSearch.getFromLocationAsyn(query);// 设置异步逆地理编码请求
-    }
-
-
-    @Override
-    public void onRegeocodeSearched(RegeocodeResult result, int rCode) {
-        if (rCode == 1000) {
-            if (result != null && result.getRegeocodeAddress() != null
-                    && result.getRegeocodeAddress().getFormatAddress() != null) {
-                String formatAddress = result.getRegeocodeAddress().getFormatAddress();
-                if (formatAddress != null && formatAddress.length() > 0) {
-                    //中国国内点，使用高德地图
-                    ToastUtils.showShortToast("第一位点为国内点，建议使用高德");
-                    changeToAmapView(nowUsePoint);
-                } else {
-                    //查询不到逆编码数据，使用google地图
-                    ToastUtils.showShortToast("第一位点为国外点，建议使用Google");
-                    changeToGoogleMapView(nowUsePoint);
-                }
-                LogUtils.d("高德地图，单条逆地理编码：" + formatAddress);
-            } else {
-                LogUtils.d("高德地图，单条获取逆地理编码异常");
-            }
-        } else {
-            LogUtils.d("高德地图，单条获取逆地理编码异常，异常码：" + rCode);
-        }
-    }
-
-    @Override
-    public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
-
     }
 
     /**
