@@ -8,7 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.bean.AndroidApiTest;
@@ -91,7 +91,8 @@ public class RetrofitActivity extends BaseActivity {
                 //TODO retrofit 
                 break;
             case R.id.retrofit_get:
-                Observable<Repos> reposObservable = myApplication.httpApis().getRepos().compose(this.bindUntilEvent(ActivityEvent.DESTROY));
+                Observable<Repos> reposObservable = myApplication.httpApis().getRepos();
+                reposObservable.compose(this.bindUntilEvent(ActivityEvent.DESTROY));
                 RetrofitTools.httpRequest(false, false, null, null,
                         mCompositeDisposable, reposObservable, new RetrofitResult() {
                             @Override
@@ -112,8 +113,8 @@ public class RetrofitActivity extends BaseActivity {
                             }
                         });
 
-                Observable<List<AndroidApiTest>> compose = myApplication.httpApis().androidApiTest()
-                        .compose(this.bindUntilEvent(ActivityEvent.DESTROY));
+                Observable<List<AndroidApiTest>> compose = myApplication.httpApis().androidApiTest();
+                compose.compose(this.bindUntilEvent(ActivityEvent.DESTROY));
                 RetrofitTools.httpRequest(true, true, mContext, "正在加载AndroidAPI数据",
                         mCompositeDisposable, compose, new RetrofitResult() {
                             @Override
@@ -132,8 +133,8 @@ public class RetrofitActivity extends BaseActivity {
                                 LogUtils.d("请求结束2");
                             }
                         });
-                Observable<ResBaseModel<ShangHaiBean>> demo = myApplication.httpApis().getShanghaiData("demo")
-                        .compose(this.bindUntilEvent(ActivityEvent.DESTROY));
+                Observable<ResBaseModel<ShangHaiBean>> demo = myApplication.httpApis().getShanghaiData("demo");
+                demo.compose(this.bindUntilEvent(ActivityEvent.DESTROY));
                 RetrofitTools.httpCommonRequest(false, false, null, null,
                         mCompositeDisposable, demo, new RetrofitResult() {
 

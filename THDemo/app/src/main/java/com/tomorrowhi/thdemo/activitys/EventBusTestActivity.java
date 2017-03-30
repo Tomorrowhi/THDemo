@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
-import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.bean.EventBusTestCommonEvent;

@@ -23,7 +23,6 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.tomorrowhi.thdemo"
-        minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -43,7 +42,8 @@ android {
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
 
-        jackOptions { enabled true }
+//        jackOptions { enabled true }
+
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [eventBusIndex: 'com.tomorrowhi.thdemo.MyEventBusIndex']
@@ -110,26 +110,27 @@ android {
             }
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
 
     productFlavors {
         thDemoTwo {
             applicationId "com.tomorrowhi.thdemo.two"
-            minSdkVersion 17
+            minSdkVersion 21
             versionCode 1
             versionName "1.0"
         }
         thDemothree {
-            minSdkVersion 17
+            minSdkVersion 21
             applicationId 'com.tomorrowhi.thdemo.three'
             versionCode 1
             versionName '1.0'
         }
         thdemo {
-            minSdkVersion 17
+            minSdkVersion 21
             applicationId 'com.tomorrowhi.thdemo'
             versionCode 1
             versionName '1.0'
@@ -166,12 +167,6 @@ def getSigningProperties() {
     }
 }
 
-//apt {
-//    arguments {
-//        eventBusIndex "com.tomorrowhi.thdemo.MyEventBusIndex"
-//    }
-//}
-
 greendao {
     schemaVersion 1     //数据库版本号
     daoPackage 'com.tomorrowhi.thdemo.dao'    //数据库相关文件包名
@@ -183,10 +178,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.7.5.201505241946'
     //support
-    compile 'com.android.support:appcompat-v7:25.3.0'
-    compile 'com.android.support:support-v4:25.3.0'
-    compile 'com.android.support:design:25.3.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
     //retrofit2
@@ -216,6 +212,7 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar'
     //rxlifecycle2
     compile 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.0.1'
     //rxPreferences
     compile 'com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC1'

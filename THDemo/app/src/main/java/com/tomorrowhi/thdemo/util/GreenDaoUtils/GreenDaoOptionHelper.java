@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 
-import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.tomorrowhi.thdemo.dao.DaoMaster;
 
 import org.greenrobot.greendao.database.Database;

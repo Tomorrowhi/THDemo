@@ -23,7 +23,7 @@ import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
 import com.bigkoo.pickerview.OptionsPickerView;
-import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.util.locationUtiils.LocationUtil;

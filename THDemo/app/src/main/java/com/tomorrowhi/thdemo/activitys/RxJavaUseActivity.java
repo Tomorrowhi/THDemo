@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.widget.ImageButton;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.f2prateek.rx.preferences2.Preference;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;

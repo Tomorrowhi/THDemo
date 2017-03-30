@@ -25,9 +25,9 @@ import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
-import com.blankj.utilcode.utils.ScreenUtils;
-import com.blankj.utilcode.utils.SizeUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.SizeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
@@ -77,7 +77,7 @@ public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCal
     private AMap aMap;
     private PolylineOptions options;
     private MarkerOptions watchMarkerOptionStart, watchMarkerOptionEnd, watchMarkerOptionPoint;
-    private Marker startmarker, endMarker, redMarker;
+    private Marker endMarker;
 
     //公共
     private List<LocusPointBean> nowUsePoint = new ArrayList<>();
@@ -463,7 +463,6 @@ public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCal
         watchMarkerOptionStart
                 .position(new LatLng(playLocus.getLat(), playLocus.getLng()))
                 .draggable(false);
-        startmarker = aMap.addMarker(watchMarkerOptionStart);
     }
 
     /**
@@ -488,7 +487,6 @@ public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCal
                 .position(new LatLng(playLocus.getLat(), playLocus.getLng()))
                 .draggable(false)
                 .anchor(0.5f, 0.5f);
-        redMarker = aMap.addMarker(watchMarkerOptionPoint);
     }
 
     /**

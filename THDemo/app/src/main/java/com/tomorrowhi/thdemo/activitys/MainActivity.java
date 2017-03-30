@@ -6,16 +6,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.PhoneUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.PhoneUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.f2prateek.rx.preferences2.Preference;
+import com.tbruyelle.rxpermissions2.Permission;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.common.MyConstants;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity {
 
@@ -55,19 +58,26 @@ public class MainActivity extends BaseActivity {
     protected void initData() {
         //初始化权限
         rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.READ_PHONE_STATE)
-                .subscribe(granted -> {
-                    if (granted) {
-                        //已经获取权限
-                    } else {
-                        //未获取权限
-                    }
-                });
+                .subscribe(new Consumer<Boolean>() {
+                               @Override
+                               public void accept(@NonNull Boolean aBoolean) throws Exception {
+                                   if (aBoolean) {
+                                       //已经获取权限
+                                   } else {
+                                       //未获取权限
+                                   }
+                               }
+                           }
+                );
         rxPermissions.requestEach(Manifest.permission.CAMERA, Manifest.permission.READ_PHONE_STATE)
-                .subscribe(permission -> {
-                    if (permission.granted) {
-                        LogUtils.d("获取的权限名：" + permission.name);
-                    } else {
-                        LogUtils.d("拒绝的权限名：" + permission.name);
+                .subscribe(new Consumer<Permission>() {
+                    @Override
+                    public void accept(@NonNull Permission permission) throws Exception {
+                        if (permission.granted) {
+                            LogUtils.d("获取的权限名：" + permission.name);
+                        } else {
+                            LogUtils.d("拒绝的权限名：" + permission.name);
+                        }
                     }
                 });
         Preference<Long> appId = defaultRxPreferences.getLong(MyConstants.APP_ID);

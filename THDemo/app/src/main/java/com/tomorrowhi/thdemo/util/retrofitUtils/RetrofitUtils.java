@@ -3,7 +3,7 @@ package com.tomorrowhi.thdemo.util.retrofitUtils;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.tomorrowhi.thdemo.util.retrofitUtils.progress.ProgressHelper;
 
 import java.io.File;

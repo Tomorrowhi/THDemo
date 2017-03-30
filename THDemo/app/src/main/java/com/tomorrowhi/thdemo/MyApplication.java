@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.support.multidex.MultiDexApplication;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.ToastUtils;
-import com.blankj.utilcode.utils.Utils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
+import com.blankj.utilcode.util.Utils;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tomorrowhi.thdemo.dao.DaoMaster;
@@ -109,7 +109,10 @@ public class MyApplication extends MultiDexApplication {
 
     private void initUtils() {
         Utils.init(this);
-        LogUtils.init(isLogAndDebug, false, 'v', logTag);
+        new LogUtils.Builder().setLogSwitch(isLogAndDebug)
+                .setGlobalTag(logTag)
+                .setLog2FileSwitch(false)
+                .setBorderSwitch(true);
         ToastUtils.init(false);
     }
 

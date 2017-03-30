@@ -7,11 +7,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.f2prateek.rx.preferences2.Preference;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.common.MyConstants;
-import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -51,11 +51,13 @@ public class RxPreferenceActivity extends BaseActivity {
     @Override
     protected void initEvent() {
         //设置数据监听
-        rxPreference.asObservable()
-                .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
+        rxPreference
+                .asObservable()
+//                .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
+                        LogUtils.d("监听到的数据：" + s);
                         spListen.setText(s);
                     }
                 });

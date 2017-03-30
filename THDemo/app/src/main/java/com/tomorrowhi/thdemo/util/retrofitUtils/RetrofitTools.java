@@ -4,9 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.NetworkUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.tomorrowhi.thdemo.bean.ResBaseModel;
 import com.tomorrowhi.thdemo.util.DialogUtil;
 
@@ -37,7 +37,7 @@ public class RetrofitTools {
      */
     public static void httpRequest(boolean isShowProgress, boolean isCancelRequest, Context context, String showContent,
                                    CompositeDisposable mCompositeDisposable,
-                                   Observable request, RetrofitResult result) {
+                                   Observable request, final RetrofitResult result) {
         if (initRequest(context, showContent, isCancelRequest, isShowProgress, mCompositeDisposable))
             return;
         mCompositeDisposable.add(request
@@ -86,7 +86,7 @@ public class RetrofitTools {
      */
     public static void httpCommonRequest(boolean isShowProgress, boolean isCancelRequest, Context context, String showContent,
                                          CompositeDisposable mCompositeDisposable,
-                                         Observable request, RetrofitResult result) {
+                                         Observable request, final RetrofitResult result) {
         if (initRequest(context, showContent, isCancelRequest, isShowProgress, mCompositeDisposable))
             return;
         mCompositeDisposable.add(request
@@ -140,7 +140,7 @@ public class RetrofitTools {
      * @param mCompositeDisposable mCompositeDisposable
      * @return true，终止往下执行
      */
-    private static boolean initRequest(Context context, String showContent, boolean isCancelRequest, boolean isShowProgress, CompositeDisposable mCompositeDisposable) {
+    private static boolean initRequest(Context context, String showContent, boolean isCancelRequest, boolean isShowProgress, final CompositeDisposable mCompositeDisposable) {
         //检查网络
         if (!NetworkUtils.isConnected()) {
             //网络未连接
