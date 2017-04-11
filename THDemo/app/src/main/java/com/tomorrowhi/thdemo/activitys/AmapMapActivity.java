@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -67,6 +68,8 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
     TextView aMapAppLocationDesc;
     @BindView(R.id.a_map_bottom_desc)
     RelativeLayout aMapBottomDesc;
+    @BindView(R.id.once_location)
+    Button mOnceLocation;
 
     private AMap aMap;
     private UiSettings mUiSettings;
@@ -155,7 +158,8 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
         navigationBitmapDescriptor = BitmapDescriptorFactory.fromView(fenceLocationView);
     }
 
-    @OnClick({R.id.title_return_iv, R.id.a_map_my_location, R.id.a_map_assign_points_navigation})
+    @OnClick({R.id.title_return_iv, R.id.a_map_my_location, R.id.a_map_assign_points_navigation, R.id.once_location
+    })
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.title_return_iv:
@@ -191,6 +195,9 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
                 bundle.putParcelable(MyConstants.APP_LOCATION_LATLNG, appLatlng);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                break;
+            case R.id.once_location:
+                startOnceLocation();
                 break;
         }
     }
@@ -238,6 +245,13 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
         LogUtils.d("startLocation");
     }
 
+    private void startOnceLocation() {
+        locationClient.setLocationOption(LocationUtil.getDefaultOption(true));
+        locationClient.setLocationListener(appOnceLocationListener);
+        // 启动定位
+        locationClient.startLocation();
+    }
+
     private void stopLocation() {
         //停止定位
         locationClient.stopLocation();
@@ -270,6 +284,7 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
         @Override
         public void onLocationChanged(AMapLocation loc) {
             if (null != loc) {
+                ToastUtils.showShortToast("连续定位code：" + loc.getErrorCode() + "纬度：" + loc.getLatitude() + "经度：" + loc.getLongitude());
                 LogUtils.d("连续定位code：" + loc.getErrorCode() + "纬度：" + loc.getLatitude() + "经度：" + loc.getLongitude());
                 //解析定位结果
                 appLatlng = new LatLng(loc.getLatitude(), loc.getLongitude());
@@ -290,6 +305,27 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
             }
         }
     };
+
+    /**
+     * App单次定位监听，会移动到至中心点
+     */
+    AMapLocationListener appOnceLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation loc) {
+            if (null != loc) {
+                ToastUtils.showShortToast("单次定位code：" + loc.getErrorCode() + "纬度：" + loc.getLatitude() + "经度：" + loc.getLongitude());
+                LogUtils.d("单次定位code：" + loc.getErrorCode() + "纬度：" + loc.getLatitude() + "经度：" + loc.getLongitude());
+                //解析定位结果
+                clearAllMarkersToMap();
+                appLatlng = new LatLng(loc.getLatitude(), loc.getLongitude());
+                aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(appLatlng, LocationUtil.MAP_LEVEL));
+                addAppMarkersToMap();
+            } else {
+                LogUtils.d("定位失败");
+            }
+        }
+    };
+
 
     /**
      * 获取指定坐标的逆地理位置编码
@@ -434,4 +470,6 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
     public View getInfoContents(Marker marker) {
         return null;
     }
+
+
 }

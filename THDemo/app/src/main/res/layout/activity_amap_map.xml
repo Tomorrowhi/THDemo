@@ -25,6 +25,13 @@
 
         </com.amap.api.maps.MapView>
 
+        <Button
+            android:id="@+id/once_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单次定位"
+      />
+
         <LinearLayout
             android:id="@+id/map_view_location_ll"
             android:layout_width="wrap_content"
