@@ -182,11 +182,11 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
             case R.id.a_map_assign_points_navigation:
                 //导航
                 if (navigationLatLng == null || (navigationLatLng.longitude == 0 && navigationLatLng.latitude == 0)) {
-                    ToastUtils.showShortToast("请在地图上选择导航点");
+                    ToastUtils.showShort("请在地图上选择导航点");
                     return;
                 }
                 if (appLatlng == null || (appLatlng.longitude == 0 && appLatlng.latitude == 0)) {
-                    ToastUtils.showShortToast("正在定位，请稍后");
+                    ToastUtils.showShort("正在定位，请稍后");
                     return;
                 }
                 Intent intent = new Intent(mContext, AMapNavigationActivity.class);
@@ -284,7 +284,7 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
         @Override
         public void onLocationChanged(AMapLocation loc) {
             if (null != loc) {
-                ToastUtils.showShortToast("连续定位code：" + loc.getErrorCode() + "纬度：" + loc.getLatitude() + "经度：" + loc.getLongitude());
+                ToastUtils.showShort("连续定位code：" + loc.getErrorCode() + "纬度：" + loc.getLatitude() + "经度：" + loc.getLongitude());
                 LogUtils.d("连续定位code：" + loc.getErrorCode() + "纬度：" + loc.getLatitude() + "经度：" + loc.getLongitude());
                 //解析定位结果
                 appLatlng = new LatLng(loc.getLatitude(), loc.getLongitude());
@@ -313,7 +313,7 @@ public class AmapMapActivity extends BaseActivity implements GeocodeSearch.OnGeo
         @Override
         public void onLocationChanged(AMapLocation loc) {
             if (null != loc) {
-                ToastUtils.showShortToast("单次定位code：" + loc.getErrorCode() + "纬度：" + loc.getLatitude() + "经度：" + loc.getLongitude());
+                ToastUtils.showShort("单次定位code：" + loc.getErrorCode() + "纬度：" + loc.getLatitude() + "经度：" + loc.getLongitude());
                 LogUtils.d("单次定位code：" + loc.getErrorCode() + "纬度：" + loc.getLatitude() + "经度：" + loc.getLongitude());
                 //解析定位结果
                 clearAllMarkersToMap();

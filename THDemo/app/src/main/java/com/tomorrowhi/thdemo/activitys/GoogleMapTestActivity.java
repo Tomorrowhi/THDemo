@@ -105,7 +105,7 @@ public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCal
     protected void initData() {
         nowUsePoint = getIntent().getParcelableArrayListExtra(MyConstants.POINT_LIST);
         if (nowUsePoint == null) {
-            ToastUtils.showShortToast("传递的坐标点列表为null");
+            ToastUtils.showShort("传递的坐标点列表为null");
             return;
         } else {
             for (LocusPointBean bean : nowUsePoint) {
@@ -427,10 +427,10 @@ public class GoogleMapTestActivity extends BaseActivity implements OnMapReadyCal
         boolean isAMapDataAvailable = CoordinateConverter.isAMapDataAvailable(locusPointBean.getLat(), locusPointBean.getLng());
         if (isAMapDataAvailable) {
             //true代表当前位置在大陆、港澳地区，反之不在。
-            ToastUtils.showShortToast("第一位点为国内点，建议使用高德");
+            ToastUtils.showShort("第一位点为国内点，建议使用高德");
             changeToAmapView(nowUsePoint);
         } else {
-            ToastUtils.showShortToast("第一位点为国外点，建议使用Google");
+            ToastUtils.showShort("第一位点为国外点，建议使用Google");
             changeToGoogleMapView(nowUsePoint);
         }
     }

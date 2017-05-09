@@ -54,7 +54,7 @@ public class RetrofitTools {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
                                 DialogUtil.hide();
-                                ToastUtils.showShortToast("请求失败，请稍后重试");
+                                ToastUtils.showShort("请求失败，请稍后重试");
                                 result.handleError(throwable);
                             }
                         },
@@ -101,7 +101,7 @@ public class RetrofitTools {
                                     result.handleResponse(resBaseModel);
                                 } else {
                                     //返回结果有误
-                                    ToastUtils.showShortToast("返回数据有误");
+                                    ToastUtils.showShort("返回数据有误");
                                 }
 
                             }
@@ -110,7 +110,7 @@ public class RetrofitTools {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
                                 DialogUtil.hide();
-                                ToastUtils.showShortToast("请求失败，请稍后重试");
+                                ToastUtils.showShort("请求失败，请稍后重试");
                                 result.handleError(throwable);
                             }
                         },
@@ -144,7 +144,7 @@ public class RetrofitTools {
         //检查网络
         if (!NetworkUtils.isConnected()) {
             //网络未连接
-            ToastUtils.showShortToast("请检查网络");
+            ToastUtils.showShort("请检查网络");
             return true;
         }
         //设置弹窗

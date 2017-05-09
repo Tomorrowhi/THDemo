@@ -6,7 +6,6 @@ import android.content.pm.ApplicationInfo;
 import android.support.multidex.MultiDexApplication;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -113,7 +112,6 @@ public class MyApplication extends MultiDexApplication {
                 .setGlobalTag(logTag)
                 .setLog2FileSwitch(false)
                 .setBorderSwitch(true);
-        ToastUtils.init(false);
     }
 
     private void initBugLy() {

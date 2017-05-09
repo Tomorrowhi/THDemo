@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by zhaotaotao on 2016/12/23.
@@ -236,7 +235,7 @@ public class AMapNavigationActivity extends BaseActivity implements AMapNaviView
     @Override
     public void onCalculateRouteFailure(int i) {
         DialogUtil.hide();
-        ToastUtils.showShortToast("路径规划失败，请返回重试");
+        ToastUtils.showShort("路径规划失败，请返回重试");
     }
 
     @Override

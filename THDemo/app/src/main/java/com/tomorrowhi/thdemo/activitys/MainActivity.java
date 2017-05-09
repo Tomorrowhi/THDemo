@@ -16,6 +16,7 @@ import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.common.MyConstants;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -40,6 +41,8 @@ public class MainActivity extends BaseActivity {
     Button singletonTestBt;
     @BindView(R.id.google_map_test_bt)
     Button mGoogleMapTestBt;
+    @BindView(R.id.download_file)
+    Button mDownloadFile;
 
     @Override
     protected int getLayoutRes() {
@@ -126,18 +129,26 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.rx_bus_test_bt:
                 //RxBus
-                ToastUtils.showShortToast("RxBus 需要适配RxJava 2.0");
+                ToastUtils.showShort("RxBus 需要适配RxJava 2.0");
 //                startActivity(new Intent(this, RxBusTestActivity.class));
                 break;
             case R.id.singleton_test_bt:
-                ToastUtils.showShortToast("单例模式的应用，请看代码");
+                ToastUtils.showShort("单例模式的应用，请看代码");
                 startActivity(new Intent(this, SingletonTestActivity.class));
                 break;
             case R.id.google_map_test_bt:
                 //Google地图
                 startActivity(new Intent(this, GoogleMapFunctionActivity.class));
                 break;
+            case R.id.download_file:
+                break;
         }
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

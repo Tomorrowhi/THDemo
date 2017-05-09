@@ -146,14 +146,14 @@ public class RxJavaUseActivity extends BaseActivity {
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                        ToastUtils.showShortToast("获取成功");
+                        ToastUtils.showShort("获取成功");
                         LogUtils.d("获取成功");
                         LogUtils.d(responseBody.toString());
                     }
 
                     @Override
                     public void onError(Throwable t) {
-                        ToastUtils.showShortToast("获取失败，检查网络");
+                        ToastUtils.showShort("获取失败，检查网络");
                         t.printStackTrace();
                     }
 
@@ -221,7 +221,7 @@ public class RxJavaUseActivity extends BaseActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        ToastUtils.showShortToast(s);
+                        ToastUtils.showShort(s);
                     }
                 });
     }

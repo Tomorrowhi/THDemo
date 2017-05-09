@@ -65,6 +65,12 @@
                 fontPath="fonts/JianKaTong.ttf"
                 android:text="google地图"
                 tools:ignore="MissingPrefix"/>
+            <Button
+                android:id="@+id/download_file"
+                style="@style/main_bt_style"
+                fontPath="fonts/JianKaTong.ttf"
+                android:text="下载文件"
+                tools:ignore="MissingPrefix"/>
         </LinearLayout>
 
 
