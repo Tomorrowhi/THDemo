@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout style="@style/title_tab_style">
+
+        <include layout="@layout/title_return_iv"/>
+
+        <TextView
+            style="@style/title_center_desc"
+            android:text="Sensor 计步"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1、重启手机后，计步器数据就会清零，实际开发中需要手动保存计步数据；
+\n2、每天的计步数据需要单独计算，实际开发中需要启动服务去进行此项工作，记录每天的数据，然后对比保存的数据，活的差值
+\n3、尤其需要注意关机这种情况，需要着重处理。例如，收到关机广播后，设置标记位，然后等收到开机广播后，启动服务，重新设置标记位。然后计算每天的运动数据时，根据标记位，对数据进行计算。"
+        />
+
+    <TextView
+        android:id="@+id/steps_num"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_1"
+        />
+
+</LinearLayout>

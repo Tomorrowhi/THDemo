@@ -43,6 +43,8 @@ public class MainActivity extends BaseActivity {
     Button mGoogleMapTestBt;
     @BindView(R.id.download_file)
     Button mDownloadFile;
+    @BindView(R.id.sensor_feature)
+    Button mSensorFeature;
 
     @Override
     protected int getLayoutRes() {
@@ -101,7 +103,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.event_bus_test_bt, R.id.a_map_test_bt, R.id.rx_Java_test_bt,
             R.id.rx_preference_test_bt, R.id.singleton_test_bt, R.id.retrofit_test_bt,
-            R.id.google_map_test_bt})
+            R.id.google_map_test_bt,R.id.sensor_feature})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.event_bus_test_bt:
@@ -141,6 +143,10 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, GoogleMapFunctionActivity.class));
                 break;
             case R.id.download_file:
+                break;
+            case R.id.sensor_feature:
+                //sensor 计步传感器
+                startActivity(new Intent(this, SensorActivity.class));
                 break;
         }
     }

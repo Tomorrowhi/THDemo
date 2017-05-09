@@ -30,6 +30,10 @@
 
     <uses-permission android:name="android.permission.READ_LOGS"/>
 
+    <!--计步sensor权限-->
+    <uses-feature android:name="android.hardware.sensor.stepcounter" />
+    <uses-feature android:name="android.hardware.sensor.stepdetector" />
+
     <permission
         android:name="${applicationId}.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"/>
@@ -75,6 +79,7 @@
         <activity android:name=".activitys.RetrofitActivity"/>
         <activity android:name=".activitys.GoogleMapTestActivity"/>
         <activity android:name=".activitys.GoogleMapFunctionActivity"/>
+        <activity android:name=".activitys.SensorActivity"/>
 
 
         <!--googleMap-->

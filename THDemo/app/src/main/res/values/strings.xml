@@ -5,4 +5,5 @@
     <string name="safe_set_save_safety_zone">保存安全区</string>
     <string name="safe_set_zone_range_desc">区域范围</string>
     <string name="safe_set_meter">米</string>
+    <string name="steps_num">%1$s步</string>
 </resources>
