@@ -45,6 +45,8 @@ public class MainActivity extends BaseActivity {
     Button mDownloadFile;
     @BindView(R.id.sensor_feature)
     Button mSensorFeature;
+    @BindView(R.id.service_test)
+    Button mServiceTest;
 
     @Override
     protected int getLayoutRes() {
@@ -103,7 +105,8 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.event_bus_test_bt, R.id.a_map_test_bt, R.id.rx_Java_test_bt,
             R.id.rx_preference_test_bt, R.id.singleton_test_bt, R.id.retrofit_test_bt,
-            R.id.google_map_test_bt,R.id.sensor_feature})
+            R.id.google_map_test_bt, R.id.sensor_feature, R.id.rx_bus_test_bt,
+            R.id.service_test})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.event_bus_test_bt:
@@ -120,6 +123,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.green_dao_test_bt:
                 //green dao
+                ToastUtils.showShort("未完成");
                 break;
             case R.id.rx_Java_test_bt:
                 //RxJava 使用Demo
@@ -132,7 +136,7 @@ public class MainActivity extends BaseActivity {
             case R.id.rx_bus_test_bt:
                 //RxBus
                 ToastUtils.showShort("RxBus 需要适配RxJava 2.0");
-//                startActivity(new Intent(this, RxBusTestActivity.class));
+                startActivity(new Intent(this, RxBusTestActivity.class));
                 break;
             case R.id.singleton_test_bt:
                 ToastUtils.showShort("单例模式的应用，请看代码");
@@ -147,6 +151,9 @@ public class MainActivity extends BaseActivity {
             case R.id.sensor_feature:
                 //sensor 计步传感器
                 startActivity(new Intent(this, SensorActivity.class));
+                break;
+            case R.id.service_test:
+                startActivity(new Intent(this, ServiceActivity.class));
                 break;
         }
     }

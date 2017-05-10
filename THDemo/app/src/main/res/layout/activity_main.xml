@@ -80,6 +80,12 @@
                 fontPath="fonts/JianKaTong.ttf"
                 android:text="sensor"
                 tools:ignore="MissingPrefix"/>
+
+            <Button
+                android:id="@+id/service_test"
+                style="@style/main_bt_style"
+                android:text="service_test"
+                tools:ignore="MissingPrefix"/>
         </LinearLayout>
 
 
