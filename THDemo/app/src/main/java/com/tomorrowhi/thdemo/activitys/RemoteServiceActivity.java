@@ -8,7 +8,7 @@ import com.tomorrowhi.thdemo.base.BaseActivity;
  * Created by zhaotaotao on 2017/5/10.
  */
 
-class RemoteServiceActivity extends BaseActivity{
+public class RemoteServiceActivity extends BaseActivity {
     @Override
     protected int getLayoutRes() {
         return 0;
