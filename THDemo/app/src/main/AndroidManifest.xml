@@ -82,14 +82,22 @@
         <activity android:name=".activitys.SensorActivity"/>
         <activity android:name=".activitys.ServiceActivity"/>
         <activity android:name=".activitys.LocalServiceActivity"/>
-        <activity android:name=".activitys.NotificationServiceActivity"
+        <activity
+            android:name=".activitys.NotificationServiceActivity"
             android:launchMode="singleTask"
             />
         <activity android:name=".activitys.RemoteServiceActivity"/>
 
         <!--Service-->
         <service android:name=".service.BackGroundLocalService"/>
-        <service android:name=".service.BackGroundRemoteService"/>
+        <service
+            android:name=".service.BackGroundRemoteService"
+            android:process=":remote.msg"
+            >
+            <intent-filter>
+                <action android:name="com.tomorrowhi.thdemo.service.BackGroundRemoteService"/>
+            </intent-filter>
+        </service>
         <service android:name=".service.BackGroundNotificationService"/>
 
         <!--googleMap-->
