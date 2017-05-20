@@ -6,7 +6,7 @@
               android:background="@color/white_1"
               android:orientation="vertical">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -86,8 +86,14 @@
                 style="@style/main_bt_style"
                 android:text="service_test"
                 tools:ignore="MissingPrefix"/>
+
+            <Button
+                android:id="@+id/connect_third_party"
+                style="@style/main_bt_style"
+                android:text="连接第三方平台"
+                tools:ignore="MissingPrefix"/>
         </LinearLayout>
 
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

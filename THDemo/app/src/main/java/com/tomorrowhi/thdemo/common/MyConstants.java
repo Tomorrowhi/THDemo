@@ -18,4 +18,8 @@ public class MyConstants {
 
     public static final String REMOTE_SERVICE_FLAG = "com.tomorrowhi.thdemo.service.BackGroundRemoteService";
 
+    //连接google fit 使用
+    public static final int REQUEST_OAUTH = 1;
+    public static final String AUTH_PENDING = "auth_state_pending";
+
 }

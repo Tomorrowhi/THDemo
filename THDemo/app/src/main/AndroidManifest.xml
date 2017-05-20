@@ -82,6 +82,8 @@
         <activity android:name=".activitys.SensorActivity"/>
         <activity android:name=".activitys.ServiceActivity"/>
         <activity android:name=".activitys.LocalServiceActivity"/>
+        <activity android:name=".activitys.ConnectThirdPartyActivity"/>
+        <activity android:name=".activitys.GoogleFitActivity"/>
         <activity
             android:name=".activitys.NotificationServiceActivity"
             android:launchMode="singleTask"

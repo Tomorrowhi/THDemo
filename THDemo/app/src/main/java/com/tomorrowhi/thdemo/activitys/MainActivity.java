@@ -47,6 +47,8 @@ public class MainActivity extends BaseActivity {
     Button mSensorFeature;
     @BindView(R.id.service_test)
     Button mServiceTest;
+    @BindView(R.id.connect_third_party)
+    Button mConnectGoogleFit;
 
     @Override
     protected int getLayoutRes() {
@@ -106,7 +108,7 @@ public class MainActivity extends BaseActivity {
     @OnClick({R.id.event_bus_test_bt, R.id.a_map_test_bt, R.id.rx_Java_test_bt,
             R.id.rx_preference_test_bt, R.id.singleton_test_bt, R.id.retrofit_test_bt,
             R.id.google_map_test_bt, R.id.sensor_feature, R.id.rx_bus_test_bt,
-            R.id.service_test})
+            R.id.service_test,R.id.connect_third_party})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.event_bus_test_bt:
@@ -155,6 +157,10 @@ public class MainActivity extends BaseActivity {
             case R.id.service_test:
                 startActivity(new Intent(this, ServiceActivity.class));
                 break;
+            case R.id.connect_third_party:
+                startActivity(new Intent(this,ConnectThirdPartyActivity.class));
+                break;
+
         }
     }
 

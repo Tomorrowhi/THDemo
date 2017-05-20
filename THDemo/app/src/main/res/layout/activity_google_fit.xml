@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:baselineAligned="false"
+              android:orientation="vertical">
+
+    <RelativeLayout style="@style/title_tab_style">
+
+        <include layout="@layout/title_return_iv"/>
+
+        <TextView
+            style="@style/title_center_desc"
+            android:text="Google Fit Test"/>
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <Button
+                android:id="@+id/connect_google_fit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="连接Google Fit"/>
+
+            <TextView
+                android:id="@+id/read_sensor_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="读取到的传感器数值："
+                />
+
+            <Button
+                android:id="@+id/disconnect_google_fit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="断开连接"/>
+
+            <Button
+                android:id="@+id/show_subscriptions_bt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="show Subscriptions"
+                />
+
+            <Button
+                android:id="@+id/cancel_subscriptions_bt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="cancel Subscriptions"
+                />
+
+            <Button
+                android:id="@+id/btn_view_steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="view this weeks steps"
+                />
+
+            <Button
+                android:id="@+id/btn_view_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="view today's steps"
+                />
+
+            <Button
+                android:id="@+id/btn_add_steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="add step data for today"
+                />
+
+            <Button
+                android:id="@+id/btn_update_steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update step data for yesterday"
+                />
+
+            <Button
+                android:id="@+id/btn_update_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update user height"
+                />
+
+            <Button
+                android:id="@+id/btn_update_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update user weight"
+                />
+
+            <Button
+                android:id="@+id/btn_delete_steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete step data for yesterday"
+                />
+
+            <TextView
+                android:id="@+id/tv_update_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="对数据的操作结果："
+                />
+
+            <TextView
+                android:id="@+id/tv_data_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="123"
+                />
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>
