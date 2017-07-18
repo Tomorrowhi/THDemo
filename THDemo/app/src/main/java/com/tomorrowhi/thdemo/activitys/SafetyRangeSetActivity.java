@@ -20,6 +20,7 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
 import com.bigkoo.pickerview.OptionsPickerView;
@@ -86,7 +87,7 @@ public class SafetyRangeSetActivity extends BaseActivity implements GeocodeSearc
         //绑定mapView的生命周期
         mapView.onCreate(savedInstanceState);
         //设置默认的Latlng
-        watchLatlng = new LatLng(22.571097, 113.861000);
+        watchLatlng = new LatLng(22.5713174860362, 113.866440712987);
         if (aMap == null) {
             aMap = mapView.getMap();
         }
@@ -209,7 +210,7 @@ public class SafetyRangeSetActivity extends BaseActivity implements GeocodeSearc
      */
     public void getAddress(final LatLonPoint latLonPoint) {
         //设置坐标、逆地理编码的精确度、坐标系格式
-        RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 10, GeocodeSearch.AMAP);
+        RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 200, GeocodeSearch.AMAP);
         geocoderSearch.getFromLocationAsyn(query);
     }
 
@@ -218,7 +219,18 @@ public class SafetyRangeSetActivity extends BaseActivity implements GeocodeSearc
         if (rCode == 1000) {
             if (result != null && result.getRegeocodeAddress() != null
                     && result.getRegeocodeAddress().getFormatAddress() != null) {
-                addressName = result.getRegeocodeAddress().getFormatAddress();
+                RegeocodeAddress regeocodeAddress = result.getRegeocodeAddress();
+                addressName = regeocodeAddress.getProvince()    //省、直辖市名称
+                        + regeocodeAddress.getCity()    //城市名称
+                        + regeocodeAddress.getDistrict()    //区（县）名称
+                        + regeocodeAddress.getStreetNumber().getStreet() //门牌信息中的街道名称
+                        + regeocodeAddress.getStreetNumber().getNumber() //门牌信息中的门牌号码
+//                        + regeocodeAddress.getNeighborhood()    //社区名称
+                ;
+                if (regeocodeAddress.getAois() != null && regeocodeAddress.getAois().size() > 0) {
+                    //AOI（面状数据）的数据，如果存在的话，取第一个
+                    addressName += regeocodeAddress.getAois().get(0).getAoiName();
+                }
                 if (result.getRegeocodeQuery().getPoint().getLatitude() == watchLatlng.latitude
                         && result.getRegeocodeQuery().getPoint().getLongitude() == watchLatlng.longitude) {
                     safeSetRangeDes.setText(addressName);

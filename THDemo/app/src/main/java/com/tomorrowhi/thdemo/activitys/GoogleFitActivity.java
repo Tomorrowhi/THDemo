@@ -688,6 +688,7 @@ public class GoogleFitActivity extends BaseActivity implements OnDataPointListen
 
     private void disConnectFit() {
         if (mApiClient != null && mApiClient.isConnected()) {
+            LogUtils.d("disConnectFit");
             Fitness.SensorsApi.remove(mApiClient, this)
                     .setResultCallback(new ResultCallback<Status>() {
                         @Override

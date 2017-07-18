@@ -38,6 +38,7 @@
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_marginBottom">22dp</item>
     </style>
+
     <style name="activity_content_ll">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
@@ -55,6 +56,7 @@
         <item name="android:rowCount">2</item>
         <item name="android:useDefaultMargins">true</item>
     </style>
+
     <style name="app_upgrade_progress_tv">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -62,4 +64,8 @@
         <item name="android:textColor">@color/black_1</item>
         <item name="android:textSize">18sp</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>

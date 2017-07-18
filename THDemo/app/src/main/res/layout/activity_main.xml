@@ -92,6 +92,12 @@
                 style="@style/main_bt_style"
                 android:text="连接第三方平台"
                 tools:ignore="MissingPrefix"/>
+
+            <Button
+                android:id="@+id/record_test"
+                style="@style/main_bt_style"
+                android:text="录音测试"
+                tools:ignore="MissingPrefix"/>
         </LinearLayout>
 
 
