@@ -108,7 +108,7 @@ public class MyApplication extends MultiDexApplication {
 
     private void initUtils() {
         Utils.init(this);
-        new LogUtils.Builder().setLogSwitch(isLogAndDebug)
+        LogUtils.getConfig().setLogSwitch(isLogAndDebug)
                 .setGlobalTag(logTag)
                 .setLog2FileSwitch(false)
                 .setBorderSwitch(true);
