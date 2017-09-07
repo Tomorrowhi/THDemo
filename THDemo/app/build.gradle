@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'bugly'
 
@@ -189,9 +190,9 @@ dependencies {
     })
     compile group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.7.5.201505241946'
     //support
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.+'
+    compile 'com.android.support:support-v4:25.+'
+    compile 'com.android.support:design:25.+'
     compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
     //retrofit2
@@ -215,8 +216,8 @@ dependencies {
     //sqlbrite 暂不支持RxJava2
     //    compile 'com.squareup.sqlbrite:sqlbrite:1.1.1'
     //butterknife
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //rxPermissions2
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
     //rxlifecycle2
@@ -261,6 +262,7 @@ dependencies {
     //google fit
     compile 'com.google.android.gms:play-services-fitness:10.2.6'
     apply plugin: 'com.google.gms.google-services'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
 

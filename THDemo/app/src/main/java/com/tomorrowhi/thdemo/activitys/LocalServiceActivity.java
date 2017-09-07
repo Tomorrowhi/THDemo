@@ -10,19 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.OnClick;
 import com.blankj.utilcode.util.EmptyUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.bean.event.LocalServiceData;
 import com.tomorrowhi.thdemo.service.BackGroundLocalService;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by zhaotaotao on 2017/5/10.
@@ -138,7 +135,8 @@ public class LocalServiceActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        unbindService(mServiceConnection);
+        if (mServiceConnection != null)
+            unbindService(mServiceConnection);
         super.onDestroy();
     }
 }

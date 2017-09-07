@@ -6,100 +6,13 @@
               android:background="@color/white_1"
               android:orientation="vertical">
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/event_bus_test_bt"
-                style="@style/main_bt_style"
-                android:text="EventBus 3.0 test"/>
-
-            <Button
-                android:id="@+id/a_map_test_bt"
-                style="@style/main_bt_style"
-                android:text="高德地图 test"/>
-
-            <Button
-                android:id="@+id/green_dao_test_bt"
-                style="@style/main_bt_style"
-                android:text="green Dao test"/>
-
-            <Button
-                android:id="@+id/retrofit_test_bt"
-                style="@style/main_bt_style"
-                fontPath="fonts/JianKaTong.ttf"
-                android:text="retrofit test"
-                tools:ignore="MissingPrefix"/>
-
-            <Button
-                android:id="@+id/rx_Java_test_bt"
-                style="@style/main_bt_style"
-                android:text="RxJava test"/>
-
-            <Button
-                android:id="@+id/rx_preference_test_bt"
-                style="@style/main_bt_style"
-                android:text="RxPreferences test"/>
-
-            <Button
-                android:id="@+id/rx_bus_test_bt"
-                style="@style/main_bt_style"
-                android:text="RxBus test"/>
-
-            <Button
-                android:id="@+id/singleton_test_bt"
-                style="@style/main_bt_style"
-                fontPath="fonts/JianKaTong.ttf"
-                android:text="单例模式"
-                tools:ignore="MissingPrefix"/>
-
-            <Button
-                android:id="@+id/google_map_test_bt"
-                style="@style/main_bt_style"
-                fontPath="fonts/JianKaTong.ttf"
-                android:text="google地图"
-                tools:ignore="MissingPrefix"/>
-
-            <Button
-                android:id="@+id/download_file"
-                style="@style/main_bt_style"
-                fontPath="fonts/JianKaTong.ttf"
-                android:text="下载文件"
-                android:visibility="gone"
-                tools:ignore="MissingPrefix"/>
-
-            <Button
-                android:id="@+id/sensor_feature"
-                style="@style/main_bt_style"
-                fontPath="fonts/JianKaTong.ttf"
-                android:text="sensor"
-                tools:ignore="MissingPrefix"/>
-
-            <Button
-                android:id="@+id/service_test"
-                style="@style/main_bt_style"
-                android:text="service_test"
-                tools:ignore="MissingPrefix"/>
-
-            <Button
-                android:id="@+id/connect_third_party"
-                style="@style/main_bt_style"
-                android:text="连接第三方平台"
-                tools:ignore="MissingPrefix"/>
-
-            <Button
-                android:id="@+id/record_test"
-                style="@style/main_bt_style"
-                android:text="录音测试"
-                tools:ignore="MissingPrefix"/>
-        </LinearLayout>
+    </android.support.v7.widget.RecyclerView>
 
 
-    </android.support.v4.widget.NestedScrollView>
+
 </LinearLayout>
