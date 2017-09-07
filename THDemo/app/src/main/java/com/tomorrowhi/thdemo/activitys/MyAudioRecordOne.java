@@ -1,15 +1,12 @@
 package com.tomorrowhi.thdemo.activitys;
 
-import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioRecord;
-import android.media.AudioTrack;
-import android.media.MediaPlayer;
-import android.media.MediaRecorder;
+import android.media.*;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -17,20 +14,6 @@ import com.tomorrowhi.thdemo.R;
 import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.util.StorageUtils;
 import com.tomorrowhi.thdemo.util.voiceUtils.AmrEncoder;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
@@ -40,6 +23,8 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+
+import java.io.*;
 
 /**
  * Created by zhaotaotao on 2017/7/18.
@@ -230,7 +215,8 @@ public class MyAudioRecordOne extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         isRecording = false;
-        recordThread.dispose();
+        if (recordThread != null)
+            recordThread.dispose();
     }
 
 

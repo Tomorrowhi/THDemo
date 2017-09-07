@@ -7,6 +7,7 @@ import android.support.multidex.MultiDexApplication;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
+import com.google.android.gms.ads.MobileAds;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tomorrowhi.thdemo.dao.DaoMaster;
@@ -81,6 +82,11 @@ public class MyApplication extends MultiDexApplication {
 //        initPicasso();
         initDAO();
 //        initService();
+        initADMob();
+    }
+
+    private void initADMob() {
+        MobileAds.initialize(this, BuildConfig.ADMob);
     }
 
     private void initDefaultFont() {

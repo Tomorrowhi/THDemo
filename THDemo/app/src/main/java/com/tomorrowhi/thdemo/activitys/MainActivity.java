@@ -180,6 +180,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, MyAudioRecordOne.class));
                 break;
             case 13:
+                startActivity(new Intent(this, ADModTest.class));
                 break;
         }
     }
