@@ -20,15 +20,16 @@ def buildTime() {
 def apkName = "thdemo"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.tomorrowhi.thdemo"
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         // dex突破65535的限制
         multiDexEnabled true
+        flavorDimensions "versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk { //高德地图 设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
@@ -97,12 +98,8 @@ android {
             //签名配置
             signingConfig signingConfigs.release
             applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def outputFile = output.outputFile
-                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        def fileName = outputFile.name.replace("app", "${apkName}-${defaultConfig.versionName}-${buildTime()}")
-                        output.outputFile = new File(outputFile.parent, fileName)
-                    }
+                variant.outputs.all {
+                    outputFileName = "${variant.name}-${variant.versionName}-${buildTime()}.apk"
                 }
             }
         }
@@ -133,17 +130,6 @@ android {
 //                    QQ_KEY_SCHEME: "",
 //                    GAODE_KEY    : ""
             ]
-
-            //友盟
-//            buildConfigField "String", "QQ_KEY", "\" \""//QQ KEY
-//            buildConfigField "String", "QQ_SEC", "\" \""//QQ SEC
-//            buildConfigField "String", "SINA_KEY", "\" \""//SINA KEY
-//            buildConfigField "String", "SINA_SEC", "\" \""//SINA SEC
-//            buildConfigField "String", "TWITTER_KEY", "\" \""//TWITTER KEY
-//            buildConfigField "String", "TWITTER_SEC", "\" \""
-            //微信
-//            buildConfigField "String", "WX_KEY", "\" \""//WX KEY
-//            buildConfigField "String", "WX_SEC", "\" \""//WX SEC
             buildConfigField "String", "ADMob", "\"ca-app-pub-6452996519517957~1530699320\""//ADMob广告 应用ID
         }
     }
@@ -189,84 +175,108 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.7.5.201505241946'
+    compile 'org.jacoco:org.jacoco.agent:0.7.5.201505241946'
+
     //support
-    compile 'com.android.support:appcompat-v7:25.+'
-    compile 'com.android.support:support-v4:25.+'
-    compile 'com.android.support:design:25.+'
-    compile 'com.android.support:multidex:1.0.1'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:support-v4:27.0.2'
+    implementation 'com.android.support:design:27.0.2'
+    implementation 'com.android.support:multidex:1.0.2'
     testCompile 'junit:junit:4.12'
+
     //retrofit2
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-    compile 'com.squareup.okhttp3:okhttp:3.7.0'
-    compile 'com.squareup.okio:okio:1.11.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
+    implementation 'com.squareup.okio:okio:1.12.0'
+
     //RxJava
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+
     //RxAndroid
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
     //RxBinding 暂不支持RxJava2
-    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-leanback-v17:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-leanback-v17:2.0.0'
+
     //sqlbrite 暂不支持RxJava2
+
     //    compile 'com.squareup.sqlbrite:sqlbrite:1.1.1'
+
     //butterknife
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
     //kotlin butterknife
-    compile 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
+    implementation 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
+
     //rxPermissions2
-    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+
     //rxlifecycle2
-    compile 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
-    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
-    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.0.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.0.1'
+
     //rxPreferences
-    compile 'com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC1'
+    implementation 'com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC1'
+
     //leakcanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    //ZXing qrcodecore
-    compile 'com.google.zxing:core:3.3.0'
-    compile 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'
-    compile 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
-    //picasso
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    //eventBus
-    compile 'org.greenrobot:eventbus:3.0.0'
-    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.0.1'
-    //greenDao
-    compile 'org.greenrobot:greendao:3.2.2'
-    compile 'org.greenrobot:greendao-generator:3.2.2'
-    //pickerview
-    compile 'com.bigkoo:pickerview:2.1.1'
-    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
-    compile 'com.tencent.bugly:crashreport:latest.release'
-    //util
-    compile 'com.blankj:utilcode:latest.release'
-    //Jpush
-    compile 'cn.jiguang.sdk:jpush:3.0.5'
-    compile 'cn.jiguang.sdk:jcore:1.1.2'
-    //全局替换字体
-    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
-    //xrecyclerview
-    compile 'com.jcodecraeer:xrecyclerview:1.3.2'
 
-    compile 'com.google.firebase:firebase-core:11.0.1'
+    //ZXing qrcodecore
+    implementation 'com.google.zxing:core:3.3.0'
+    implementation 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'
+    implementation 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //eventBus
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+
+    //greenDao
+    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation 'org.greenrobot:greendao-generator:3.2.2'
+
+    //pickerview
+    implementation 'com.bigkoo:pickerview:2.1.1'
+
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+    implementation 'com.tencent.bugly:crashreport:2.6.5'
+
+    //util
+    implementation 'com.blankj:utilcode:1.9.1'
+
+    //Jpush
+    implementation 'cn.jiguang.sdk:jpush:3.0.5'
+    implementation 'cn.jiguang.sdk:jcore:1.1.2'
+
+    //全局替换字体
+    implementation 'uk.co.chrisjenx:calligraphy:2.2.0'
+
+    //xrecyclerview
+    implementation 'com.jcodecraeer:xrecyclerview:1.3.2'
+    implementation 'com.google.firebase:firebase-core:11.8.0'
+
     //googleMap
-    compile 'com.google.android.gms:play-services-maps:11.0.1'
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+
     //google fit
-    compile 'com.google.android.gms:play-services-fitness:11.0.1'
-    compile 'com.google.firebase:firebase-ads:11.0.1'
+    implementation 'com.google.android.gms:play-services-fitness:11.8.0'
+    implementation 'com.google.firebase:firebase-ads:11.8.0'
     apply plugin: 'com.google.gms.google-services'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
 

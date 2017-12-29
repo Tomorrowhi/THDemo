@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.support.multidex.MultiDexApplication;
+import android.support.v4.content.ContextCompat;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
 import com.google.android.gms.ads.MobileAds;
 import com.squareup.leakcanary.LeakCanary;
@@ -118,6 +120,7 @@ public class MyApplication extends MultiDexApplication {
                 .setGlobalTag(logTag)
                 .setLog2FileSwitch(false)
                 .setBorderSwitch(true);
+        ToastUtils.setBgColor(ContextCompat.getColor(this,R.color.black_1));
     }
 
     private void initBugLy() {

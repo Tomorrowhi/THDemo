@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="1dp">
 
     <TextView
             android:id="@+id/tv_ad_mod_test"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="1"
             android:gravity="center"
             android:padding="10dp"
             android:background="@color/gray_1"
     />
-
 </LinearLayout>

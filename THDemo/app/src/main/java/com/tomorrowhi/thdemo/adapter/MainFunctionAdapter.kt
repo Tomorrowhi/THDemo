@@ -47,8 +47,8 @@ class MainFunctionAdapter(mCtx: Context) : RecyclerView.Adapter<MainFunctionAdap
 
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-        var functionName: TextView = item.findViewById(R.id.function_name) as TextView
-        var functionLl: LinearLayout = item.findViewById(R.id.function_ll) as LinearLayout
+        var functionName: TextView = item.findViewById(R.id.function_name)
+        var functionLl: LinearLayout = item.findViewById(R.id.function_ll)
     }
 
 }

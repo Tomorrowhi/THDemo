@@ -5,13 +5,14 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="center"
+              android:id="@+id/view_ad_ll"
 
 >
     <com.google.android.gms.ads.NativeExpressAdView
             android:id="@+id/adView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            ads:adSize="280x132"
+            ads:adSize="320x150"
             ads:adUnitId="ca-app-pub-6452996519517957/5023576992"
     >
     </com.google.android.gms.ads.NativeExpressAdView>

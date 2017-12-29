@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import butterknife.BindView;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -17,12 +17,14 @@ import com.tomorrowhi.thdemo.base.BaseActivity;
 import com.tomorrowhi.thdemo.bean.MainFunctionBean;
 import com.tomorrowhi.thdemo.common.MyConstants;
 import com.tomorrowhi.thdemo.interfaces.RecyclerViewClickListener;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
+
+import butterknife.BindView;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity {
 
@@ -31,7 +33,7 @@ public class MainActivity extends BaseActivity {
 
     private String[] functions = {"EventBus 3.0 test", "高德地图", "Green Dao",
             "Retrofit", "RxJava", "RxPreferences", "RxBus",
-            "单例模式", "google地图", "sensor", "service_test", "连接第三方平台", "录音测试", "广告测试"};
+            "单例模式", "google地图", "sensor", "service_test", "连接第三方平台", "录音测试","扫码测试"};
     private List<MainFunctionBean> functionBeanList = new ArrayList<>();
     private MainFunctionAdapter mainFunctionAdapter;
 
@@ -180,7 +182,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, MyAudioRecordOne.class));
                 break;
             case 13:
-                startActivity(new Intent(this, ADModTest.class));
+                startActivity(new Intent(this, ScanTest.class));
                 break;
         }
     }
